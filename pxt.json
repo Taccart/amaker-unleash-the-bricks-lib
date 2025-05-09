@@ -4,13 +4,15 @@
     "dependencies": {
         "core": "*",
         "radio": "*",
-        "microphone": "*"
+        "microphone": "*",
+        "microbit-pxt-timeanddate": "github:bsiever/microbit-pxt-timeanddate#v2.0.33"
     },
     "files": [
         "main.blocks",
         "main.ts",
         "README.md",
-        "main.py"
+        "main.py",
+        "constants.ts"
     ],
     "testFiles": [
         "test.ts"
