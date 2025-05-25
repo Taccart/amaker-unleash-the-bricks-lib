@@ -1,6 +1,7 @@
 # send acknowledgement of message received
 def send_acknowledge(message: str):
     emit_message(get_json_string(MSG_KEY_ACKNOWLEDGE, message))
+    
 def get_json_string(message_key: str, json_payload: str):
     if len(json_payload) > 0:
         return "{\"" + message_key + "\":{\"" + MSG_KEY_EMITTER + "\":" + get_emitter_json_string() + ", \"payload\":" + json_payload + "}"
@@ -22,13 +23,17 @@ def tournament_start():
 
 def on_button_pressed_a():
     basic.show_leds("""
-        . # # . .
+        # # # . .
         # . . # .
         # # # # .
-        # . . # .
+        # . # . .
         # . . # .
         """)
     increment_radio_group(1)
+    # The radio group is controlled by button A and B.
+    radio.set_group(conf_radio_group)
+    send_log(LOG_LEVEL_WARNING,
+        "radio group =" + ("" + str(conf_radio_group)))
     basic.show_number(conf_radio_group)
 input.on_button_pressed(Button.A, on_button_pressed_a)
 
@@ -37,7 +42,7 @@ def init_constants():
     RADIO_GROUP_MAX = 16
     MSG_KEY_HEARTBEAT = "heartbeat"
     MSG_KEY_ACKNOWLEDGE = "acknowledge"
-    MSG_KEY_LOG = "acknowledge"
+    MSG_KEY_LOG = "log"
     MSG_KEY_STATUS = "status"
     MSG_KEY_EMITTER = "emitter"
     LOG_LEVEL_INFO = "info"
@@ -53,38 +58,9 @@ def send_log(level: str, message2: str):
     emit_message(get_json_string(MSG_KEY_LOG,
             "{\"level\":\"" + level + "\",\"message\":\"" + message2 + "\"}"))
 
-def on_button_pressed_ab():
-    basic.show_string("radio group =" + str(conf_radio_group))
-    # The radio group is controlled by button A and B.
-    radio.set_group(conf_radio_group)
-    basic.show_icon(IconNames.YES)
-    send_log(LOG_LEVEL_WARNING, "radio group =" + str(conf_radio_group))
-input.on_button_pressed(Button.AB, on_button_pressed_ab)
-
-def on_received_string(receivedString):
-   pass
-
-def on_received_radio(receivedString):
-    if conf_communication_channel == COMMUNICATION_CHANNEL_SERIAL:
-        on_received_message(receivedString)
-    else:
-        send_log(LOG_LEVEL_ERROR,"Communication channel is "+conf_communication_channel" but a message is received on  "+COMMUNICATION_CHANNEL_SERIAL+ "")
-
-radio.on_received_string(on_received_radio)
-
-# Button B decrements the radio group
-
-def on_button_pressed_b():
-    basic.show_leds("""
-        # # # . .
-        # . . # .
-        # # # . .
-        # . . # .
-        # # # . .
-        """)
-    increment_radio_group(-1)
-    basic.show_number(conf_radio_group)
-input.on_button_pressed(Button.B, on_button_pressed_b)
+def on_received_string2(receivedString):
+    on_received_message(receivedString)
+radio.on_received_string(on_received_string2)
 
 # Register the controller if no one is registered yet
 def register_controller(name: str):
@@ -93,9 +69,10 @@ def register_controller(name: str):
         conf_controller_name = name
         emit_message("{hearbeat\":" + get_emitter_json_string() + "}")
     else:
-        pass
+        send_log(LOG_LEVEL_WARNING,
+            "controlle is  " + conf_controller_name + " : cannot change to " + name)
 def get_bot_info_string():
-    return "{ \"collected\":" + ("" + str(var_count_collected)) + ", \"distance\" :" + ("" + str(var_bot_travelled_distance)) + ",\"status\":\"" + var_bot_current_status + "\"}"
+    return "{ \"collected\":" + str(var_count_collected) + ",\"status\":\"" + var_bot_current_status + "\"}"
 # Emits the message to the defined destination.
 def emit_message(msg: str):
     if conf_communication_channel == COMMUNICATION_CHANNEL_RADIO:
@@ -106,21 +83,11 @@ def emit_message(msg: str):
         serial.write_string(msg)
     else:
         basic.show_string("WARNING: Invalid message_destination")
-def on_received_message(message: str):
-    send_acknowledge(message)
+def on_received_message(message3: str):
+    send_acknowledge(message3)
 # internal function: emitter json string
 def get_emitter_json_string():
     return "{\"from\":" + control.device_name() + "\", \"at_ms\":" + ("" + str(control.millis())) + "}"
-# You can use message over serial  to test your code
-
-def on_received_serial():
-    if conf_communication_channel == COMMUNICATION_CHANNEL_SERIAL:
-        on_received_message(serial.read_line())
-    else:
-        send_log(LOG_LEVEL_ERROR,"Communication channel is "+conf_communication_channel" but a message is received on  "+COMMUNICATION_CHANNEL_SERIAL+ "")
-
-serial.on_data_received(serial.delimiters(Delimiters.NEW_LINE), on_received_serial)
-
 def increment_radio_group(increment: number):
     global conf_radio_group
     conf_radio_group += increment
@@ -131,14 +98,13 @@ def increment_radio_group(increment: number):
     send_log("INFO",
         "updated radio_group to" + ("" + str(conf_radio_group)))
 def init_conf_and_vars():
-    global conf_communication_channel, conf_controller_name, conf_radio_group, var_bot_travelled_distance, var_count_collected, var_bot_current_status
+    global conf_communication_channel, conf_controller_name, conf_radio_group, var_count_collected, var_bot_current_status
     # Do not change message destination after start.
     conf_communication_channel = COMMUNICATION_CHANNEL_RADIO
     # Name of controller. This will be updated by code : do not touch
     conf_controller_name = CONTROLLER_UNDEFINED
     conf_radio_group = RADIO_GROUP_MIN
     radio.set_group(conf_radio_group)
-    var_bot_travelled_distance = 0
     var_count_collected = 0
     var_bot_current_status = "undefined status"
 # implement your own code here
@@ -147,26 +113,27 @@ def init_conf_and_vars():
 def tournament_stop():
     send_log(LOG_LEVEL_INFO, "stop! ")
 RADIO_GROUP_MIN = 0
+conf_communication_channel = ""
 var_bot_current_status = ""
-var_bot_travelled_distance = 0
 var_count_collected = 0
 conf_controller_name = ""
-conf_communication_channel = ""
 COMMUNICATION_CHANNEL_SERIAL = ""
 COMMUNICATION_CHANNEL_NONE = ""
 COMMUNICATION_CHANNEL_RADIO = ""
 CONTROLLER_UNDEFINED = ""
 LOG_LEVEL_ERROR = ""
-LOG_LEVEL_WARNING = ""
 LOG_LEVEL_DEBUG = ""
 MSG_KEY_LOG = ""
 RADIO_GROUP_MAX = 0
+LOG_LEVEL_WARNING = ""
 conf_radio_group = 0
 MSG_KEY_HEARTBEAT = ""
 LOG_LEVEL_INFO = ""
 MSG_KEY_STATUS = ""
 MSG_KEY_EMITTER = ""
 MSG_KEY_ACKNOWLEDGE = ""
+def on_received_string(receivedString2: any):
+    pass
 basic.show_icon(IconNames.SMALL_SQUARE)
 init_constants()
 init_conf_and_vars()
