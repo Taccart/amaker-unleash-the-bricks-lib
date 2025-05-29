@@ -6,14 +6,22 @@
         "radio": "*"
     },
     "files": [
-        "main.ts",
+        "amaker_utg_bot.ts",
         "README.md"
     ],
-    "targetVersions": {
-        "target": "7.0.61",
-        "targetId": "microbit"
-    },
+
+    "public": true,
     "supportedTargets": [
         "microbit"
-    ]
+    ],
+    "preferredEditor": "tsprj",
+    "yotta": {
+        "config": {
+            "microbit-dal": {
+                "bluetooth": {
+                    "enabled": 0
+                }
+            }
+        }
+    }
 }
