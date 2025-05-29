@@ -2,48 +2,54 @@
  * Custom blocks
  */
 
-enum TournamentActions {
-    //% block="Start"
-    START,
-    //% block="Stop"
-    STOP,
-    //% block="Safety"
-    SAFETY,
-
-}
+// enum TournamentActions {
+//     //% block="Start"
+//     START,
+//     //% block="Stop"
+//     STOP,
+//     //% block="Safety"
+//     SAFETY,
+//
+// }
 //% weight=100 color=#0fbc11 icon=""
-namespace UnleashTheGeekSlaves {
-    //% blockId="log_level" enumName="LogLevel"
-    export enum LogLevel {
-        //% block="info"
-        Info="INF",
-        //% block="debug"
-        Debug="DBG",
-        //% block="warning"
-        Warning="WRN",
-        //% block="error"
-        Error="ERR"
-    }
+namespace UnleashTheGeekBot {
 
-    //% blockId="communication_channel" enumName="CommunicationChannel"
-    export enum CommunicationChannel {
-        //% block="radio"
-        Radio,
-        //% block="led"
-        Led,
-        //% block="serial"
-        Serial
-    }
+    //% blockId="foo" block="test"
+    export function foo {
+        // This is a placeholder function to ensure the namespace is valid.
+        }
 
-    // Constants
-    const RADIO_GROUP_MIN = 0
-    const RADIO_GROUP_MAX = 16
-    const CONTROLLER_UNDEFINED = "undefined"
-    const MSG_KEY_HEARTBEAT = "heartbeat"
-    const MSG_KEY_ACKNOWLEDGE = "acknowledge"
-    const MSG_KEY_LOG = "log"
-    const MSG_KEY_STATUS = "status"
-    const MSG_KEY_EMITTER = "emitter"
+//     //% blockId="log_level" enumName="LogLevel"
+//     export enum LogLevel {
+//         //% block="info"
+//         Info="INF",
+//         //% block="debug"
+//         Debug="DBG",
+//         //% block="warning"
+//         Warning="WRN",
+//         //% block="error"
+//         Error="ERR"
+//     }
+//
+//     //% blockId="communication_channel" enumName="CommunicationChannel"
+//     export enum CommunicationChannel {
+//         //% block="radio"
+//         Radio,
+//         //% block="led"
+//         Led,
+//         //% block="serial"
+//         Serial
+//     }
+//
+//     // Constants
+//     const RADIO_GROUP_MIN = 0
+//     const RADIO_GROUP_MAX = 16
+//     const CONTROLLER_UNDEFINED = "undefined"
+//     const MSG_KEY_HEARTBEAT = "heartbeat"
+//     const MSG_KEY_ACKNOWLEDGE = "acknowledge"
+//     const MSG_KEY_LOG = "log"
+//     const MSG_KEY_STATUS = "status"
+//     const MSG_KEY_EMITTER = "emitter"
 
     // Variables
 //     let conf_communication_channel: CommunicationChannel = CommunicationChannel.Radio

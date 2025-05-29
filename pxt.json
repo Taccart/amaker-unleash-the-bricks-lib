@@ -1,10 +1,9 @@
 {
-    "name": "unleash-the-bricks",
+    "name": "unleash-the-geek-bot",
     "description": "Unleash the Bricks library for your bots.",
     "dependencies": {
         "core": "*",
-        "radio": "*",
-        "microbit-pxt-timeanddate": "github:bsiever/microbit-pxt-timeanddate#v2.0.33"
+        "radio": "*"
     },
     "files": [
         "main.ts",
@@ -16,6 +15,5 @@
     },
     "supportedTargets": [
         "microbit"
-    ],
-    "preferredEditor": "blocksprj"
+    ]
 }
