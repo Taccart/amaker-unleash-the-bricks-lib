@@ -46,11 +46,11 @@ namespace UnleashTheGeekSlaves {
     const MSG_KEY_EMITTER = "emitter"
 
     // Variables
-    let conf_communication_channel: CommunicationChannel = CommunicationChannel.Radio
-    let var_bot_current_status = "undefined status"
-    let var_count_collected = 0
-    let conf_controller_name = CONTROLLER_UNDEFINED
-    let conf_radio_group = RADIO_GROUP_MIN
+//     let conf_communication_channel: CommunicationChannel = CommunicationChannel.Radio
+//     let var_bot_current_status = "undefined status"
+//     let var_count_collected = 0
+//     let conf_controller_name = CONTROLLER_UNDEFINED
+//     let conf_radio_group = RADIO_GROUP_MIN
 
     /**
      * Initialize configuration and variables.
