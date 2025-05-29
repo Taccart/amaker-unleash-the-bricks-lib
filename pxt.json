@@ -1,21 +1,14 @@
 {
-    "name": "amaker-radio-comm",
-    "description": "",
+    "name": "unleash-the-bricks",
+    "description": "Unleash the Bricks library for your bots.",
     "dependencies": {
         "core": "*",
         "radio": "*",
-        "microphone": "*",
         "microbit-pxt-timeanddate": "github:bsiever/microbit-pxt-timeanddate#v2.0.33"
     },
     "files": [
-        "main.blocks",
         "main.ts",
-        "README.md",
-        "main.py",
-        "constants.ts"
-    ],
-    "testFiles": [
-        "test.ts"
+        "README.md"
     ],
     "targetVersions": {
         "target": "7.0.61",

@@ -15,15 +15,6 @@ enum LogLevel {
     ERROR
 }
 
-enum TournamentActions {
-    //% block="Start"
-    START,
-    //% block="Stop"
-    STOP,
-    //% block="Safety"
-    SAFETY,
-    
-}
 enum Communication {
     //% block="Serial"
     SERIAL,
@@ -34,11 +25,3 @@ enum Communication {
 
 }
 
-
-/**
- * Custom blocks
- */
-//% weight=100 color=#0fbc11 icon=""
-namespace TournamentSlave {
-   
-}
