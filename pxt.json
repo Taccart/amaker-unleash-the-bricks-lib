@@ -1,15 +1,18 @@
 {
     "name": "unleash-the-geek-bot",
-    "description": "Unleash the Bricks library for your bots.",
+    "version": "0.2025.1",
+    "description": "    \"description\": \"\",\n",
+    "license": "MIT",
     "dependencies": {
-        "core": "*",
-        "radio": "*"
+        "core": "*"
     },
     "files": [
-        "amaker_utg_bot.ts",
-        "README.md"
+        "README.md",
+        "amaker_utg_bot.ts"
     ],
-
+    "testFiles": [
+        "neotest.ts"
+    ],
     "public": true,
     "supportedTargets": [
         "microbit"
