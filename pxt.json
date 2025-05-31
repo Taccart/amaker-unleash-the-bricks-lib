@@ -2,6 +2,7 @@
     "name": "unleash-the-bricks-lib",
     "version": "0.2025.1",
     "description": "aMaker's Unleash the bricks library for micro:bit",
+    "author": "Th. Accart",
     "license": "MIT",
     "dependencies": {
         "core": "*",
