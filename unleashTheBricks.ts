@@ -448,7 +448,7 @@
         
         }
 
-        //% blockId=contest_emit_acknowledgement block="Emit acknowledgement of $command"
+        //% blockId=contest_emit_acknowledgement block="Emit acknowledgement for $command"
         //% group="comm"
         //% advanced=true
         export function emitAcknowledgement(command: string) {
