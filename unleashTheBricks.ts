@@ -469,7 +469,7 @@
         //% group="comm"
         //% weight=100
         export function emitLog(level: LogLevel, message: string) {
-            if (_log_level >= level) 
+            if (level >=_log_level)
             emitMessage(build_message_from_kv(get_kv_log(level, message)))
             
         
