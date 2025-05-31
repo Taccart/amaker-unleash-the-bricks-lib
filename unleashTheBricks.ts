@@ -112,9 +112,9 @@
         let _conf_communication_channel: CommunicationChannel
         let _conf_radio_group = RADIO_GROUP.MIN
 
-        let _on_start_callback_function: () => void = function () { console.log("Missing START callback function") }
-        let _on_stop_callback_function: () => void = function () { console.log("Missing STOP callback function") }
-        let _on_danger_callback_function: () => void = function () { console.log("Missing DANGER callback function") }
+        let _on_start_callback_function: () => void = function () { console.error("Missing START callback function") }
+        let _on_stop_callback_function: () => void = function () { console.error("Missing STOP callback function") }
+        let _on_danger_callback_function: () => void = function () { console.error("Missing DANGER callback function") }
 
         let _message_transmitter: (message: string) => void
 
@@ -175,7 +175,7 @@
             basic.showNumber(_conf_radio_group);
             emitLog(LogLevel.Info,"Radio group set to " + _conf_radio_group);
         }else {
-            console.log("Cannot increment radio group: not using radio communication channel")}
+            console.warn("Cannot increment radio group: not using radio communication channel")}
         }
 
 
@@ -196,7 +196,7 @@
                 }
                 else
                 {
-                    console.log("Cannot decrement radio group: not using radio communication channel")
+                    console.warn("Cannot decrement radio group: not using radio communication channel")
                 }
 
             }
@@ -303,7 +303,7 @@
         function on_received_string(s: string) {
             let kv = parse_received_message(s)
             if (!(kv[MESSAGE_KEYS.K_FROM] && kv[MESSAGE_KEYS.K_TO] && kv[MESSAGE_KEYS.K_TIMESTAMP] && kv[MESSAGE_KEYS.K_TYPE])) {
-                console( "Incomplete message received was ["  + s +"]")
+                console.warn( "Incomplete message received was ["  + s +"]")
 
             }
             else
@@ -422,7 +422,7 @@
                 _is_initialized = true;
             }
             if (_is_echo_to_console) {
-                console.log("Emitting message: " + msg);
+                console.debug("Emitting message: " + msg);
             }
             _message_transmitter(msg)
         }
