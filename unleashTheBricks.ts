@@ -303,8 +303,7 @@ namespace UnleashTheBricks {
         let kv = parse_received_message(s)
         if (!(kv[MESSAGE_KEYS.K_FROM] && kv[MESSAGE_KEYS.K_TO] && kv[MESSAGE_KEYS.K_TIMESTAMP] && kv[MESSAGE_KEYS.K_TYPE])) {
             console.warn("Incomplete message received was [" + s + "]")
-            console.warn("KV=" + kv.toString()
-
+            console.warn("KV=" + kv.toString())
         }
         else
             if (kv[MESSAGE_KEYS.K_TO] !== control.deviceName() && kv[MESSAGE_KEYS.K_TO] !== MESSAGE_KEYS.V_TO_ALL) {
