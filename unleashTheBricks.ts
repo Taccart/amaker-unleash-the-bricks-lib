@@ -104,6 +104,7 @@
         const DEFAULT_COMMUNICATION_CHANNEL = CommunicationChannel.Radio
         
         let _is_echo_to_console = false
+        let _log_level : LogLevel = LogLevel.Info
         let _is_initialized: boolean = false;
         let _controller_name: string
         let _collect_count: number = 0
@@ -149,7 +150,15 @@
             register_message_handlers()
 
         }
-
+        //% blockId=contest_set_log_level block="Set LogLevel %log_level"
+        //% log_level.defl=LogLevel.Info
+        //% log_level.fieldEditor="gridpicker"
+        //% log_level.fieldOptions.decompileLiterals=true
+        //% group="conf"
+        //% advanced=true
+        export function setLogLevel(level: LogLevel) {
+            _log_level = level; 
+        }
         /**
          * Increment the radio group. Attah it to a button 
          */
@@ -460,7 +469,10 @@
         //% group="comm"
         //% weight=100
         export function emitLog(level: LogLevel, message: string) {
+            if (_log_level >= level) 
             emitMessage(build_message_from_kv(get_kv_log(level, message)))
+            
+        
         }
 
         //% blockId=contest_emit_acknowledgement block="Emit acknowledgement of $command"
