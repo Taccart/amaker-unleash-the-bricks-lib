@@ -124,7 +124,7 @@ namespace UnleashTheBricks {
     }
 
     // Configuration part
-    //% blockId=conf_set_echo_to_console" block="Echo write messages to console $enabled"
+    //% blockId=conf_set_echo_to_console block="Echo write messages to console $enabled"
     //% enabled.defl=true
     //% enabled.fieldEditor="toggle"
     //% enabled.fieldOptions.onText="write to console"
