@@ -237,7 +237,7 @@ namespace UnleashTheBricks {
         * @returns an object with key-value pairs
     */
     function parse_received_message(msg: string): { [key: string]: string } {
-        console.info("parsing message: " + msg)
+        console.log("parsing message: " + msg)
         let parts = msg.split("\t");
         let result: { [key: string]: string } = {}
         for (let part of parts) {
