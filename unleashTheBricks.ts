@@ -167,7 +167,7 @@
             return _conf_radio_group;
         }
 
-        -
+
             //% group="conf"
             //% blockId=contest_set_radio_group block="Decrement the radio group" 
             //% advanced=true
