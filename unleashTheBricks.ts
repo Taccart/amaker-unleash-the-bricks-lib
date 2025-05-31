@@ -294,6 +294,22 @@ namespace UnleashTheBricks {
             emitLog(LogLevel.Warning, "Controller already registered as " + _controller_name + ". Request was from" + name)
         }
     }
+
+function objectToString(obj: { [key: string]: any }): string {
+    if (!obj) return "null";
+    
+    const keys = Object.keys(obj);
+    if (keys.length === 0) return "{}";
+    
+    const pairs = keys.map(key => {
+        const value = obj[key] === undefined ? "undefined" : 
+                     obj[key] === null ? "null" : 
+                     obj[key].toString();
+        return key + ": " + value;
+    });
+    
+    return "{ " + pairs.join(", ") + " }";
+}
     /**
      * Callback function to handle received strings.
      * It parses the received string and processes it based on the message type.
@@ -303,7 +319,7 @@ namespace UnleashTheBricks {
         let kv = parse_received_message(s)
         if (!(kv[MESSAGE_KEYS.K_FROM] && kv[MESSAGE_KEYS.K_TO] && kv[MESSAGE_KEYS.K_TIMESTAMP] && kv[MESSAGE_KEYS.K_TYPE])) {
             console.warn("Incomplete message received was [" + s + "]")
-            console.warn("KV=" + kv.toString())
+console.warn("KV=" + objectToString(kv))
         }
         else
             if (kv[MESSAGE_KEYS.K_TO] !== control.deviceName() && kv[MESSAGE_KEYS.K_TO] !== MESSAGE_KEYS.V_TO_ALL) {
