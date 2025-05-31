@@ -102,15 +102,8 @@ namespace UnleashTheBricks {
     }
 
     const DEFAULT_COMMUNICATION_CHANNEL = CommunicationChannel.Radio
-    let device_name = (() => {
-    const name = control.deviceName();
-    if (!name || name === "sim_") {
-        // Generate a random suffix for simulator devices
-        const randomSuffix = Math.randomRange(1000, 9999).toString();
-        return name === "sim_" ? name + randomSuffix : "unknownBot_" + randomSuffix;
-    }
-    return name;
-})();
+    let device_name = control.deviceName() + "." control.deviceSerialNumber().toString();
+
     let _is_echo_to_console = false
     let _log_level: LogLevel = LogLevel.Info
     let _is_initialized: boolean = false;
