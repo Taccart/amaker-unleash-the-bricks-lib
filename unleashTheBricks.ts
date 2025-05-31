@@ -237,7 +237,6 @@ namespace UnleashTheBricks {
         * @returns an object with key-value pairs
     */
     function parse_received_message(msg: string): { [key: string]: string } {
-        console.log("parsing message: " + msg)
         let parts = msg.split("\t");
         let result: { [key: string]: string } = {}
         for (let part of parts) {
@@ -309,7 +308,6 @@ namespace UnleashTheBricks {
     }
         if (!(kv[MESSAGE_KEYS.K_FROM] && kv[MESSAGE_KEYS.K_TO] && kv[MESSAGE_KEYS.K_TYPE])) {
             console.warn("Incomplete message received was [" + s + "]")
-
         }
         else
             if (kv[MESSAGE_KEYS.K_TO] !== control.deviceName() && kv[MESSAGE_KEYS.K_TO] !== MESSAGE_KEYS.V_TO_ALL) {
@@ -428,7 +426,7 @@ namespace UnleashTheBricks {
             _is_initialized = true;
         }
         if (_is_echo_to_console) {
-            console.debug("Emitting message: " + msg);
+            console.log("Emitting message: " + msg);
         }
         _message_transmitter(msg)
     }
