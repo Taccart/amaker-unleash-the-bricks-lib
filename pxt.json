@@ -8,10 +8,10 @@
     },
     "files": [
         "README.md",
-        "amaker_utg_bot.ts"
+        "unleashTheBricks.ts"
     ],
     "testFiles": [
-        "neotest.ts"
+        "unleashTheBricks.test.ts"
     ],
     "public": true,
     "supportedTargets": [

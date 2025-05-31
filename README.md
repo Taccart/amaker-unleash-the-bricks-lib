@@ -1,5 +1,5 @@
 
-> Open this page at [https://taccart.github.io/amaker-unleash-the-geek-slaves/](https://taccart.github.io/amaker-unleash-the-geek-slaves/)
+> Open this page at [https://taccart.github.io/amaker-unleash-the-geek-lib/](https://taccart.github.io/amaker-unleash-the-geek-lib/)
 
 ## Use as Extension
 
@@ -8,7 +8,7 @@ This repository can be added as an **extension** in MakeCode.
 * open [https://makecode.microbit.org/](https://makecode.microbit.org/)
 * click on **New Project**
 * click on **Extensions** under the gearwheel menu
-* search for **https://github.com/taccart/amaker-unleash-the-geek-slaves** and import
+* search for **https://github.com/taccart/amaker-unleash-the-geek-lib** and import
 
 ## Edit this project
 
@@ -16,7 +16,7 @@ To edit this repository in MakeCode.
 
 * open [https://makecode.microbit.org/](https://makecode.microbit.org/)
 * click on **Import** then click on **Import URL**
-* paste **https://github.com/taccart/amaker-unleash-the-geek-slaves** and click import
+* paste **https://github.com/taccart/amaker-unleash-the-geek-lib** and click import
 
 #### Metadata (used for search, rendering)
 
