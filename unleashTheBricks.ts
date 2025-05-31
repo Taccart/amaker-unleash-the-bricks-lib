@@ -481,6 +481,7 @@
         //% bot_status.defl=BotStatus.Idle
         //% bot_status.fieldEditor="gridpicker"
         //% bot_status.fieldOptions.decompileLiterals=true
+        //% group="conf"
         //% weight=20
         export function setBotStatus(bot_status: BotStatus) {
             _bot_status = bot_status;
