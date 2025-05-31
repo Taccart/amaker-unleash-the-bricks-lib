@@ -360,45 +360,9 @@
         }
 
 
-        /**
-         * Get a key-value pair heartbeat message
-         * @returns 
-         */
-        function get_kv_heartbeat(): { [key: string]: string } {
-            let result: { [key: string]: string } = getEmitterSignature()
-            result[MESSAGE_KEYS.K_TYPE] = MESSAGE_KEYS.V_TYPE_HEARTBEAT
-            return result
-        }
-        /**
-         * Get a key-value pair status message
-         * @returns 
-         */
-        function get_kv_status(): { [key: string]: string } {
-            let result: { [key: string]: string } = getEmitterSignature()
-            result[MESSAGE_KEYS.K_TYPE] = MESSAGE_KEYS.V_TYPE_STATUS
-            result[MESSAGE_KEYS.K_STATUS_COUNT] = get_collect_count().toString()
-            result[MESSAGE_KEYS.K_STATUS_STATE] = get_bot_status_label()
-            return result
-        }
-        /**
-         * get a key-value pair log message
-         * @param log_level 
-         * @param log_message 
-         * @returns 
-         */
-        function get_kv_log(log_level: LogLevel, log_message: string): { [key: string]: string } {
-            let result: { [key: string]: string } = getEmitterSignature()
-            result[MESSAGE_KEYS.K_TYPE] = MESSAGE_KEYS.V_TYPE_LOG
-            result[MESSAGE_KEYS.K_LOG_LEVEL] = log_level.toString()
-            result[MESSAGE_KEYS.K_PAYLOAD] = log_message
-            return result
-        }
-        function get_kv_acknowledge(command: string): { [key: string]: string } {
-            let result: { [key: string]: string } = getEmitterSignature()
-            result[MESSAGE_KEYS.K_TYPE] = MESSAGE_KEYS.V_TYPE_ACKNOWLEDGE
-            result[MESSAGE_KEYS.K_PAYLOAD] = command
-            return result
-        }
+     
+
+    
 
         /**
          * Get an intercom message with a specified payload
@@ -472,7 +436,13 @@
         //% weight=100
         export function emitLog(level: LogLevel, message: string) {
             if (level >=_log_level)
-            emitMessage(build_message_from_kv(get_kv_log(level, message)))
+            {
+                let result: { [key: string]: string } = getEmitterSignature()
+                result[MESSAGE_KEYS.K_TYPE] = MESSAGE_KEYS.V_TYPE_LOG
+                result[MESSAGE_KEYS.K_LOG_LEVEL] = level.toString()
+                result[MESSAGE_KEYS.K_PAYLOAD] = message
+                emitMessage(build_message_from_kv(result))
+            }
             
         
         }
@@ -481,20 +451,29 @@
         //% group="comm"
         //% advanced=true
         export function emitAcknowledgement(command: string) {
-            emitMessage(build_message_from_kv(get_kv_acknowledge(command)))
+            let result: { [key: string]: string } = getEmitterSignature()
+            result[MESSAGE_KEYS.K_TYPE] = MESSAGE_KEYS.V_TYPE_ACKNOWLEDGE
+            result[MESSAGE_KEYS.K_PAYLOAD] = command
+            emitMessage(build_message_from_kv(result))
         }
 
         //% blockId=contest_send_status block="Emit bot status"
         //% group="comm"
         //% advanced=true
         export function emitStatus() {
-            emitMessage(build_message_from_kv(get_kv_status()))
+             let result: { [key: string]: string } = getEmitterSignature()
+            result[MESSAGE_KEYS.K_TYPE] = MESSAGE_KEYS.V_TYPE_STATUS
+            result[MESSAGE_KEYS.K_STATUS_COUNT] = get_collect_count().toString()
+            result[MESSAGE_KEYS.K_STATUS_STATE] = get_bot_status_label()
+            emitMessage(build_message_from_kv(result))
         }
 
         //% blockId=contest_emit_heat_beat  block="Emit heart beat"
         //% group="comm"
         export function emitHeartBeat() {
-            emitMessage(build_message_from_kv(get_kv_heartbeat()))
+            let result: { [key: string]: string } = getEmitterSignature()
+            result[MESSAGE_KEYS.K_TYPE] = MESSAGE_KEYS.V_TYPE_HEARTBEAT
+            emitMessage(build_message_from_kv(result))
         }
 
         //% blockId=contest_set_bot_status block="Set bot status to $bot_status" blockGap=16
