@@ -155,7 +155,7 @@
          */
         //% group="conf"
         //% blockId=contest_set_radio_group block="Increment the radio group" 
-        export function incrementRadioGroup(): number {
+        export function incrementRadioGroup() {
             if (!_is_initialized) {
                 initCommunicationChannel(DEFAULT_COMMUNICATION_CHANNEL); // Default to Radio if not initialized
                 _is_initialized = true;
@@ -164,14 +164,14 @@
 
             radio.setGroup(_conf_radio_group);
             basic.showNumber(_conf_radio_group);
-            return _conf_radio_group;
+
         }
 
 
             //% group="conf"
             //% blockId=contest_set_radio_group block="Decrement the radio group" 
             //% advanced=true
-            export function decrementRadioGroup(): number {
+            export function decrementRadioGroup() {
                 if (!_is_initialized) {
                     initCommunicationChannel(CommunicationChannel.Radio); // Default to Radio if not initialized
                     _is_initialized = true;
@@ -180,7 +180,7 @@
 
                 radio.setGroup(_conf_radio_group);
                 basic.showNumber(_conf_radio_group);
-                return _conf_radio_group;
+
             }
 
         //% blockId=contest_get_bot_status block="Get bot current status"
