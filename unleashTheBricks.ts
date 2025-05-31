@@ -102,7 +102,7 @@ namespace UnleashTheBricks {
     }
 
     const DEFAULT_COMMUNICATION_CHANNEL = CommunicationChannel.Radio
-
+    let device_name = control.deviceName() || "unknowBot" // Fallback to a default name if not set
     let _is_echo_to_console = false
     let _log_level: LogLevel = LogLevel.Info
     let _is_initialized: boolean = false;
@@ -306,8 +306,8 @@ namespace UnleashTheBricks {
             console.log("Incomplete message received was [" + s + "]")
         }
         else
-            if (kv[MESSAGE_KEYS.K_TO] !== control.deviceName() && kv[MESSAGE_KEYS.K_TO] !== MESSAGE_KEYS.V_TO_ALL) {
-                emitLog(LogLevel.Debug, `Message not for me: ${kv[MESSAGE_KEYS.K_TO]} != ${control.deviceName()}`);
+            if (kv[MESSAGE_KEYS.K_TO] !== device_name && kv[MESSAGE_KEYS.K_TO] !== MESSAGE_KEYS.V_TO_ALL) {
+                emitLog(LogLevel.Debug, `Message not for me: ${kv[MESSAGE_KEYS.K_TO]} != ${device_name}`);
             }
             else
                 if (kv[MESSAGE_KEYS.K_TYPE] == MESSAGE_KEYS.V_TYPE_INTERCOM) {
@@ -404,7 +404,7 @@ namespace UnleashTheBricks {
      */
     function getEmitterSignature(): { [key: string]: string } {
         let result: { [key: string]: string } = {}
-        result[MESSAGE_KEYS.K_FROM] = control.deviceName()
+        result[MESSAGE_KEYS.K_FROM] = device_name
         result[MESSAGE_KEYS.K_TO] = _controller_name || MESSAGE_KEYS.V_TO_ALL // broadcast when controller is undefined
         let ms = control.millis() || -1 // default to -1 if millis() is not available
         result[MESSAGE_KEYS.K_TIMESTAMP] = ms.toString()
