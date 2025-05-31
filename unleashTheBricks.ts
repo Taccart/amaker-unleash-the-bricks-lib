@@ -301,18 +301,13 @@ namespace UnleashTheBricks {
      * @param s the received string
      */
     function on_received_string(s: string) {
-        console.warn("message received was [" + s + "]")
         let kv = parse_received_message(s)
-        for (let k of Object.keys(kv)) {
-            console.warn(" contains key: " + k + " value: " + kv[k])
-    }
         if (!(kv[MESSAGE_KEYS.K_FROM] && kv[MESSAGE_KEYS.K_TO] && kv[MESSAGE_KEYS.K_TYPE])) {
-            console.warn("Incomplete message received was [" + s + "]")
+            console.log("Incomplete message received was [" + s + "]")
         }
         else
             if (kv[MESSAGE_KEYS.K_TO] !== control.deviceName() && kv[MESSAGE_KEYS.K_TO] !== MESSAGE_KEYS.V_TO_ALL) {
                 emitLog(LogLevel.Debug, `Message not for me: ${kv[MESSAGE_KEYS.K_TO]} != ${control.deviceName()}`);
-
             }
             else
                 if (kv[MESSAGE_KEYS.K_TYPE] == MESSAGE_KEYS.V_TYPE_INTERCOM) {
