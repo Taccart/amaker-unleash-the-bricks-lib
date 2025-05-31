@@ -173,6 +173,7 @@
 
             radio.setGroup(_conf_radio_group);
             basic.showNumber(_conf_radio_group);
+            emitLog(LogLevel.Info,"Radio group set to " + _conf_radio_group);
         }else {
             console.log("Cannot increment radio group: not using radio communication channel")}
         }
@@ -191,6 +192,7 @@
 
                 radio.setGroup(_conf_radio_group);
                 basic.showNumber(_conf_radio_group);
+                emitLog(LogLevel.Info,"Radio group set to " + _conf_radio_group);
                 }
                 else
                 {
