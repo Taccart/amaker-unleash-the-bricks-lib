@@ -102,7 +102,7 @@ namespace UnleashTheBricks {
     }
 
     const DEFAULT_COMMUNICATION_CHANNEL = CommunicationChannel.Radio
-    let device_name = control.deviceName() + "." control.deviceSerialNumber().toString();
+    let device_name = control.deviceName() + "." +control.deviceSerialNumber().toString();
 
     let _is_echo_to_console = false
     let _log_level: LogLevel = LogLevel.Info
