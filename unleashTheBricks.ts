@@ -412,7 +412,7 @@ namespace UnleashTheBricks {
         result[MESSAGE_KEYS.K_FROM] = control.deviceName()
         result[MESSAGE_KEYS.K_TO] = _controller_name || MESSAGE_KEYS.V_TO_ALL // broadcast when controller is undefined
         let ms = control.millis() || -1 // default to -1 if millis() is not available
-        result[MESSAGE_KEYS.K_TIMESTAMP] = "0" //ms.toString()
+        result[MESSAGE_KEYS.K_TIMESTAMP] = ms.toString()
         return result
     }
 
