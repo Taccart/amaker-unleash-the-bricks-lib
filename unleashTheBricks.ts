@@ -432,6 +432,7 @@
         function getEmitterSignature(): { [key: string]: string } {
             let result: { [key: string]: string } = {}
             result[MESSAGE_KEYS.K_FROM] = control.deviceName()
+            result[MESSAGE_KEYS.K_TO= _controller_name || MESSAGE_KEYS.V_TO_ALL] // Acknowledge to the controller if registered, otherwise to all
             result[MESSAGE_KEYS.K_TIMESTAMP] = control.millis().toString()
             return result
         }
