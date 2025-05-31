@@ -124,7 +124,7 @@
         }
 
         // Configuration part
-        //% blockId=contest_set_echo_to_console block="Echo write messages to console $enabled"
+        //% blockId=conf_set_echo_to_console block="Echo write messages to console $enabled"
         //% enabled.defl=true
         //% enabled.fieldEditor="toggle"
         //% enabled.fieldOptions.onText="write to console"
@@ -136,10 +136,9 @@
         /**
          * MANDATORY: Initialize the communication channel.
          */
-        //% blockId=contest_init block="Initialize"
         //% group="conf"
         //% weight=1000
-        //% blockId=contest_init block="Initialize communication with $channel"
+        //% blockId=conf_init_communication_channel block="Initialize communication with $channel"
         //% channel.defl=CommunicationChannel.Radio
         //% channel.fieldEditor="gridpicker"
         //% channel.fieldOptions.decompileLiterals=true
@@ -150,7 +149,7 @@
             register_message_handlers()
 
         }
-        //% blockId=contest_set_log_level block="Set LogLevel %log_level"
+        //% blockId=conf_set_log_level block="Set LogLevel %log_level"
         //% log_level.defl=LogLevel.Info
         //% log_level.fieldEditor="gridpicker"
         //% log_level.fieldOptions.decompileLiterals=true
@@ -163,7 +162,7 @@
          * Increment the radio group. Attah it to a button 
          */
         //% group="conf"
-        //% blockId=contest_set_radio_group block="Increment the radio group" 
+        //% blockId=conf_increment_radio_group block="Increment the radio group"
         export function incrementRadioGroup() {
             if (!_is_initialized) {
                 initCommunicationChannel(DEFAULT_COMMUNICATION_CHANNEL); // Default to Radio if not initialized
@@ -180,7 +179,7 @@
 
 
             //% group="conf"
-            //% blockId=contest_set_radio_group block="Decrement the radio group" 
+            //% blockId=conf_decrement_radio_group block="Decrement the radio group"
             //% advanced=true
             export function decrementRadioGroup() {
                 
@@ -458,7 +457,7 @@
             emitMessage(build_message_from_kv(result))
         }
 
-        //% blockId=contest_send_status block="Emit bot status"
+        //% blockId=contest_emit_status block="Emit bot status"
         //% group="comm"
         //% advanced=true
         export function emitStatus() {
@@ -469,7 +468,7 @@
             emitMessage(build_message_from_kv(result))
         }
 
-        //% blockId=contest_emit_heat_beat  block="Emit heart beat"
+        //% blockId=contest_emit_heart_beat  block="Emit heart beat"
         //% group="comm"
         export function emitHeartBeat() {
             let result: { [key: string]: string } = getEmitterSignature()
