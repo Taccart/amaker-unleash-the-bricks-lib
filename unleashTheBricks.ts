@@ -158,13 +158,14 @@
         export function incrementRadioGroup() {
             if (!_is_initialized) {
                 initCommunicationChannel(DEFAULT_COMMUNICATION_CHANNEL); // Default to Radio if not initialized
-                _is_initialized = true;
             }
+        if (_conf_communication_channel == CommunicationChannel.Radio) {
             _conf_radio_group = (_conf_radio_group + 1) % (RADIO_GROUP.MAX + 1);
 
             radio.setGroup(_conf_radio_group);
             basic.showNumber(_conf_radio_group);
-
+        }else {
+            console.log("Cannot increment radio group: not using radio communication channel")}
         }
 
 
@@ -172,14 +173,20 @@
             //% blockId=contest_set_radio_group block="Decrement the radio group" 
             //% advanced=true
             export function decrementRadioGroup() {
+                
                 if (!_is_initialized) {
                     initCommunicationChannel(CommunicationChannel.Radio); // Default to Radio if not initialized
-                    _is_initialized = true;
                 }
+                if (_conf_communication_channel == CommunicationChannel.Radio) {
                 _conf_radio_group = (_conf_radio_group - 1 + (RADIO_GROUP.MAX + 1)) % (RADIO_GROUP.MAX + 1);
 
                 radio.setGroup(_conf_radio_group);
                 basic.showNumber(_conf_radio_group);
+                }
+                else
+                {
+                    console.log("Cannot decrement radio group: not using radio communication channel")
+                }
 
             }
 
