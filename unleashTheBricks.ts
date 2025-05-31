@@ -301,7 +301,7 @@
         function on_received_string(s: string) {
             let kv = parse_received_message(s)
             if (!(kv[MESSAGE_KEYS.K_FROM] && kv[MESSAGE_KEYS.K_TO] && kv[MESSAGE_KEYS.K_TIMESTAMP] && kv[MESSAGE_KEYS.K_TYPE])) {
-                emitLog(LogLevel.Debug, "Incomplete message received" + s)
+                emitLog(LogLevel.Debug, "Incomplete message received was ["  + s +"]")
 
             }
             else
