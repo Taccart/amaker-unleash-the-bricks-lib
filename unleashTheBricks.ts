@@ -408,7 +408,8 @@
             let result: { [key: string]: string } = {}
             result[MESSAGE_KEYS.K_FROM] = control.deviceName()
             result[MESSAGE_KEYS.K_TO]= _controller_name || MESSAGE_KEYS.V_TO_ALL // broadcast when controller is undefined
-            result[MESSAGE_KEYS.K_TIMESTAMP] = control.millis().toString() || "-1"
+            let ms= control.millis() || -1 // default to -1 if millis() is not available
+            result[MESSAGE_KEYS.K_TIMESTAMP] = ms.toString()
             return result
         }
 
