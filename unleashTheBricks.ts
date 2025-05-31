@@ -155,7 +155,7 @@
          */
         //% group="conf"
         //% blockId=contest_set_radio_group block="Increment the radio group" 
-        function incrementRadioGroup(): number {
+        export function incrementRadioGroup(): number {
             if (!_is_initialized) {
                 initCommunicationChannel(DEFAULT_COMMUNICATION_CHANNEL); // Default to Radio if not initialized
                 _is_initialized = true;
@@ -171,7 +171,7 @@
             //% group="conf"
             //% blockId=contest_set_radio_group block="Decrement the radio group" 
             //% advanced=true
-            function decrementRadioGroup(): number {
+            export function decrementRadioGroup(): number {
                 if (!_is_initialized) {
                     initCommunicationChannel(CommunicationChannel.Radio); // Default to Radio if not initialized
                     _is_initialized = true;
