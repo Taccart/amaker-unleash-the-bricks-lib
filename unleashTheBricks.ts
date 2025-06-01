@@ -422,7 +422,7 @@ namespace UnleashTheBricks {
             _is_initialized = true;
         }
         if (_is_echo_to_console) {
-            console.log("Emitting message: " + msg);
+            console.log("Emitting message: [" + msg+"]");
         }
         _message_transmitter(msg)
     }
