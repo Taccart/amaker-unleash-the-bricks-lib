@@ -63,15 +63,16 @@ namespace UTBBotCode {
 
 
     let _isInitialized = false;
-
+    
 
 
     let _callbacks: CommandHandlerMap = {
         onStart: () => { console.log("Missing onStart callback function"); },
         onStop: () => { console.log("Missing onStop callback function"); },
         onDanger: () => { console.log("Missing onDanger callback function"); },
-        onObeyMe: registerControllerName
+        onObeyMe: (name: string) => UTBBotCode.registerControllerName(name) 
     };
+    
     type CommandHandlerMap = {
         onStart: () => void;
         onStop: () => void;
@@ -132,6 +133,19 @@ namespace UTBBotCode {
         msgObj[MESSAGE_KEYS.K_TEAM] = getTeamNameLabel(_team);
         UTBRadioCode.emitMessage(UTBRadioCode.buildMessage(msgObj));
     }
+    export function onReceivedString(s: string) : void {
+
+        const kv = UTBRadioCode.getIntercom(s);
+        if (!kv) return;
+
+        switch (kv[MESSAGE_KEYS.K_TYPE]) {
+            case "START": _callbacks.onStart(); break;
+            case "STOP": _callbacks.onStop(); break;
+            case "DANGER": _callbacks.onDanger(); break;
+            case "OBEYME": _callbacks.onObeyMe(kv[MESSAGE_KEYS.K_FROM]); break;
+            default: {
+                console.log(`Unhandled intercom: ${kv[MESSAGE_KEYS.K_TYPE]}`);
+
     export function resetCollectCount() {
         _collectedBallsCount = 0;
     }
@@ -154,20 +168,8 @@ namespace UTBBotCode {
         } else {
             UTBRadioCode.emitLog(LogLevel.Warning, "Controller already registered as " + _controllerName + ". Request DENIED for " + name);
         }
-    }/*
-    function getIntercomType(typeLabel: string): IntercomType | null {
-        switch (typeLabel) {
-            case "HEARTBEAT": return IntercomType.HEARTBEAT;
-            case "STATUS": return IntercomType.STATUS;
-            case "START": return IntercomType.START;
-            case "STOP": return IntercomType.STOP;
-            case "DANGER": return IntercomType.DANGER;
-            case "OBEYME": return IntercomType.OBEYME;
-            case "IOBEY": return IntercomType.IOBEY;
-            default: return null;
-        }
     }
-*/
+    
     export function onReceivedString(s: string) : void {
 
         const kv = UTBRadioCode.getIntercom(s);
@@ -183,8 +185,8 @@ namespace UTBBotCode {
                 break;
             }
         }
-
     }
+
     export function  getBotTeam(): TeamName {
         return _team;
     }
@@ -192,12 +194,15 @@ namespace UTBBotCode {
     export function getBotStatus(): BotStatus {
         return _botStatus;
     }
+
     export function setBotStatus(bs: BotStatus) {
         _botStatus = bs;
     }
+
     export function getCollectedBallsCount(): number {
         return _collectedBallsCount;
     }
+
     export function incrementCollectedBallsCount(n: number): void {
         _collectedBallsCount += n;
     }   
