@@ -10,6 +10,7 @@ namespace UTBBot {
     import TeamName = UTBBotCode.TeamName;
     import BotStatus = UTBBotCode.BotStatus;
     import MESSAGE_KEYS = UTBRadioCode.MESSAGE_KEYS;
+
     // getTeamName removed; use TeamName[tn] directly where needed
     // Returns a unique device name based on device name and serial number
     //% blockId=utb_device_name block="device name"
@@ -19,10 +20,6 @@ namespace UTBBot {
 
     }
 
-
-
-
-
     //% group="Contest"
     //% weight=1000
     //% blockId=conf_init_communication_channel block="Set bot team %teamName"
@@ -31,19 +28,15 @@ namespace UTBBot {
     //% teamName.fieldOptions.decompileLiterals=true
     export function initialize(teamName: TeamName): void {
         UTBBotCode.initialize(teamName);
-        
-        
+
+
     }
-
-
 
     //% blockId=contest_get_bot_status block="Get bot current status"
     //% advanced=true
     export function getBotStatus(): BotStatus {
         return UTBBotCode.getBotStatus();
     }
-
-
 
     // Event handlers
     //% help=contest/on-received-start
@@ -52,7 +45,7 @@ namespace UTBBot {
     export function onMessageStartReceived(callback: () => void) {
 
         UTBBotCode.setOnStartCallback(callback);
-                emitAcknowledgement(IntercomType.START);
+        emitAcknowledgement(IntercomType.START);
     }
 
     //% help=contest/on-stop-received
@@ -61,7 +54,7 @@ namespace UTBBot {
     export function onMessageStopReceived(callback: () => void) {
 
         UTBBotCode.setOnStopCallback(callback);
-                emitAcknowledgement(IntercomType.STOP);
+        emitAcknowledgement(IntercomType.STOP);
     }
 
     //% help=contest/on-danger_received
@@ -70,10 +63,8 @@ namespace UTBBot {
     export function onMessageDangerReceived(callback: () => void) {
 
         UTBBotCode.setOnDangerCallback(callback);
-                emitAcknowledgement(IntercomType.DANGER);
+        emitAcknowledgement(IntercomType.DANGER);
     }
-
-
 
     //% blockId=contest_emit_acknowledgement block="Emit acknowledgement for $command"
     //% group="Communication"
@@ -89,7 +80,6 @@ namespace UTBBot {
         UTBBotCode.emitStatus();
     }
 
-
     //% blockId=contest_bot_status block="Set and emit bot status to $bot_status" blockGap=16
     //% bot_status.defl=BotStatus.Idle
     //% bot_status.fieldEditor="gridpicker"
@@ -98,7 +88,7 @@ namespace UTBBot {
     //% weight=20
     export function newBotStatus(bot_status: BotStatus) {
         UTBBotCode.setBotStatus(bot_status);
-        
+
     }
 
     //% blockId=contest_get_collected_balls_count block="Get collect count"
@@ -112,5 +102,4 @@ namespace UTBBot {
         UTBBotCode.incrementCollectedBallsCount(n);
         return getCollectedBallsCount();
     }
-
 }
