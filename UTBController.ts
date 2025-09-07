@@ -33,4 +33,10 @@ namespace UTBController {
     export function sendActionDanger(): void {
         UTBControllerCode.sendActionDanger();
     }
+
+    //% group="for controller"
+    //% blockId=utb_controller_send_obey_me block="send intercom OBEY ME"
+    export function sendObeyMe () :void {
+        UTBControllerCode.sendObeyMe();
+    }
 }

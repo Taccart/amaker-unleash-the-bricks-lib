@@ -4,9 +4,8 @@
 
 //% color=#300000 weight=1000 icon="\u25a3"
 namespace UTBRadio {
-    import LogLevel = UTBRadioCode.LogLevel;
-    import MessageType = UTBRadioCode.MessageType;
-
+    
+    
     let _initialized: boolean = false;
 
     //% group="Common"
@@ -23,24 +22,13 @@ namespace UTBRadio {
     }
         //% group="Common"
     //% blockId=contest_emit_log block="Emit log level $level with message $message" 
-    //% level.defl=LogLevel.Info
+    //% level.defl=UTBRadioCode.LogLevel.Info
     //% level.fieldEditor="gridpicker"
     //% level.fieldOptions.decompileLiterals=true
     //% weight=100
-    export function emitLog(level: LogLevel, message: string) {
+    export function emitLog(level: UTBRadioCode.LogLevel, message: string) {
         UTBRadioCode.emitLog(level, message);
     }
-    /**
-     * Gets the selected message type.
-     * @param mt The message type to select.
-     */
-        //% group="Common"
-    //% blockId=utb_message_type block="message type %mt" advanced=true
-    export function getMessageType(mt: MessageType): MessageType {
-        return mt;
-    }
-
-
 
 
     /**
@@ -49,17 +37,17 @@ namespace UTBRadio {
         */
            //% group="Common"
     //% blockId=utb_get _log_level block="get log level" advanced=true
-    export function getLogLevel(): LogLevel {
+    export function getLogLevel(): UTBRadioCode.LogLevel {
         return UTBRadioCode.getLogLevel();
     }
     
     //% group="Common"
     //% blockId=utb_set_log_level block="set log level %ll" advanced=true
-    //% ll.defl=LogLevel.Info
+    //% ll.defl=UTBRadioCode.LogLevel.Info
     //% ll.fieldEditor="gridpicker"
     //% ll.fieldOptions.decompileLiterals=true
     //% description="Set the log level for radio logs."
-    export function setLogLevel(ll: LogLevel) {
+    export function setLogLevel(ll: UTBRadioCode.LogLevel) {
         UTBRadioCode.setLogLevel(ll);
     }
 
@@ -76,6 +64,9 @@ namespace UTBRadio {
     export function getRadioGroup(): number {
         return UTBRadioCode.getRadioGroup();
     }
-
-
+    //% group="Common"
+    //% blockId=utb_get_device_id block="get device id" advanced=true
+    export function getDeviceId(): string {
+        return UTBRadioCode.deviceId;
+    }
 }

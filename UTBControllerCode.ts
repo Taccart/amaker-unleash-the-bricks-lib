@@ -18,6 +18,15 @@ namespace UTBControllerCode {
         UTBRadioCode.emitMessage(UTBRadioCode.buildMessage(msgObj));
         console.log("Sent START action");
     }
+    export function sendObeyMe() :void { 
+        let msgObj = UTBRadioCode.createMessage()
+        msgObj[UTBRadioCode.MESSAGE_KEYS.K_TYPE] = UTBRadioCode.getMessageTypeLabel(UTBRadioCode.MessageType.INTERCOM);
+        msgObj[UTBRadioCode.MESSAGE_KEYS.K_PAYLOAD] = UTBBotCode.getIntercomLabel(UTBBotCode.IntercomType.OBEYME);
+        console.log("Sending OBEYME action");
+        UTBRadioCode.emitMessage(UTBRadioCode.buildMessage(msgObj));
+        console.log("Sent OBEYME action");
+    }
+
     export function sendActionStop(): void {
         let msgObj = UTBRadioCode.createMessage()
         msgObj[UTBRadioCode.MESSAGE_KEYS.K_TYPE] = UTBRadioCode.getMessageTypeLabel(UTBRadioCode.MessageType.INTERCOM);

@@ -84,6 +84,7 @@ namespace UTBBotCode {
     };
     export function initialize(team: TeamName): void {
         _team = team;
+        UTBRadioCode.init();
         radio.onReceivedString(onReceivedString);
         _isInitialized = true;
     }
@@ -160,9 +161,9 @@ namespace UTBBotCode {
             msgObj[MESSAGE_KEYS.K_TYPE] = UTBRadioCode.getMessageTypeLabel(MessageType.ACKNOWLEDGE);
             msgObj[MESSAGE_KEYS.K_PAYLOAD] = itc.toString();
             UTBRadioCode.emitMessage(UTBRadioCode.buildMessage(msgObj));
-            UTBRadioCode.emitLog(LogLevel.Info, `Sent ACK for ${itc} to ${_controllerName}`);
+            UTBRadioCode.emitLog(LogLevel.Info, `acknowledge  ${getIntercomLabel(itc)} to controller ${_controllerName}`);
         } else {
-            UTBRadioCode.emitLog(LogLevel.Warning, `Cannot send ACK for ${itc}: No controller registered`);
+            UTBRadioCode.emitLog(LogLevel.Warning, `Cannot send acknowledgement for ${getIntercomLabel(itc)}: No controller registered`);
         }
     }
     export function registerControllerName(name: string): void {

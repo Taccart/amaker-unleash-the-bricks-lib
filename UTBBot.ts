@@ -6,14 +6,11 @@
 namespace UTBBot {
 
 
-
-    import MESSAGE_KEYS = UTBRadioCode.MESSAGE_KEYS;
-
     
     //% group="Bot"
-    //% weight=1000
+
     //% blockId=conf_init_communication_channel block="Initialize as bot, team is %teamName"
-    //% teamName.defl=TeamName.UNDEFINED
+    //% teamName.defl=UTBBotCode.TeamName.UNDEFINED
     //% teamName.fieldEditor="gridpicker"
     //% teamName.fieldOptions.decompileLiterals=true
     export function initAsBot(teamName: UTBBotCode.TeamName): void {
