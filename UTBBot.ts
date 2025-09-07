@@ -71,7 +71,7 @@ namespace UTBBot {
         UTBBotCode.emitAcknowledgement(command);
     }
 
-    //% group="Bot"
+    //% group="Bot"getIntercomType
     //% blockId=contest_emit_status block="Emit bot status"
 
     export function emitStatus() {
