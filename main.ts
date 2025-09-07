@@ -48,3 +48,10 @@ UTBBot.onMessageStartReceived(function () {
 })
 basic.showIcon(IconNames.House)
 UTBBot.initAsBot(UTBBotCode.TeamName.RequiemForABot)
+control.inBackground(function () {
+    while (true) {
+        debugmsg("background loop emitStatus")
+        UTBBot.emitStatus()
+        basic.pause(5000)
+    }
+})
