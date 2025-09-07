@@ -3,7 +3,9 @@
 //% weight=10 color=#1a61a9 icon="\uf013" block="sdsd-motor"
 namespace UTBControllerCode {
 
-
+    export function initialize(): void {
+        UTBRadioCode.init();
+    }
     export function onRadioReceivedString(receivedString: string): void {
         serial.writeString(receivedString + serial.NEW_LINE);
     }

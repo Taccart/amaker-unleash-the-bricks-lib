@@ -9,20 +9,16 @@ namespace UTBRadio {
 
     let _initialized: boolean = false;
 
-
+    //% group="Common"
     //% blockId=utb_init block="Initialize radio group %radioGroup"
-    //% group="Mandatory"
-    //% weight=100
+    //% advanced=true
     export function init(radioGroup: number = 1): void {
         UTBRadioCode.init(radioGroup);
     }
-
-    //% blockId=contest_emit_heart_beat block="Emit heart beat" group="contest"
+    //% group="Common"
+    //% blockId=contest_emit_heart_beat block="Emit heart beat" group="contest" 
+    //% advanced=true
     export function emitHeartBeat() {
-        if (!UTBRadioCode.isInitialized()) {
-            console.log("UTBRadio not initialized. Please call UTBRadio.init() first.");
-            return  ;
-        }
         UTBRadioCode.emitHeartBeat();
     }
     // Communication functions
@@ -32,9 +28,6 @@ namespace UTBRadio {
     //% level.fieldOptions.decompileLiterals=true
     //% weight=100
     export function emitLog(level: LogLevel, message: string) {
-        if (!UTBRadioCode.isInitialized()) {
-            console.log("UTBRadio not initialized. Please call UTBRadio.init() first.");
-        }
         UTBRadioCode.emitLog(level, message);
     }
     /**
@@ -57,22 +50,25 @@ namespace UTBRadio {
     export function getLogLevel(): LogLevel {
         return UTBRadioCode.getLogLevel();
     }
-    /**
-        * Sets the selected log level.
-        * @param ll The log level to select.
-        */
+    
+    //% group="Common"
     //% blockId=utb_set_log_level block="set log level %ll" advanced=true
+    //% ll.defl=LogLevel.Info
+    //% ll.fieldEditor="gridpicker"
+    //% ll.fieldOptions.decompileLiterals=true
+    //% description="Set the log level for radio logs."
     export function setLogLevel(ll: LogLevel) {
         UTBRadioCode.setLogLevel(ll);
     }
 
-
-    //% blockId=utb_set_radio_group block="set radio group %group"advanced=true
+    //% group="Common"
+    //% blockId=utb_set_radio_group block="set radio group %group"
     //% weight=90
     export function setRadioGroup(group: number): void {
         UTBRadioCode.setRadioGroup(group);
     }
 
+    //% group="Common"
     //% blockId=utb_get_radio_group block="get radio group"advanced=true
     //% weight=90
     export function getRadioGroup(): number {

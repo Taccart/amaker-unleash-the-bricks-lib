@@ -4,23 +4,32 @@
 
 //% color=#300000 weight=1000 icon="\u25a3" groups='["Amaker", "Communication"]'
 namespace UTBController {
+
+    //% group="for controller"
+    //% blockId=utb_controller_init_as_controller block="Initialize as controller"
+    //% advanced=true
+    export function initAsController (): void {
+        UTBControllerCode.initialize();
+    }
+
+    //% group="for controller"
     //% blockId=utb_controller_on_radio_received_string block="on radio received string %receivedString"
-    //% group="Communication"
-    //% weight=100
-    import MessageType = UTBRadioCode.MessageType;
-    import LogLevel = UTBRadioCode.LogLevel;
+    //% advanced=true
     export function onRadioReceivedString(receivedString: string): void {
         UTBControllerCode.onRadioReceivedString(receivedString);
     }
-    //% blockId=utb_controller_send_action_start block="send action START"
+    //% group="for controller"
+    //% blockId=utb_controller_send_action_start block="send intercom START"
     export function sendActionStart(): void {
        UTBControllerCode.sendActionStart();
     }
-    //% blockId=utb_controller_send_action_stop block="send action STOP"
+    //% group="for controller"
+    //% blockId=utb_controller_send_action_stop block="send intercom STOP"
     export function sendActionStop(): void {
         UTBControllerCode.sendActionStop();
     }
-    //% blockId=utb_controller_send_action_danger block="send action DANGER"
+    //% group="for controller"
+    //% blockId=utb_controller_send_action_danger block="send intercom DANGER"
     export function sendActionDanger(): void {
         UTBControllerCode.sendActionDanger();
     }

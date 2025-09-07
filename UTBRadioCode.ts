@@ -3,16 +3,6 @@
 // Typescript code adapted to micro:bit limitations
 namespace UTBRadioCode {
     let _isEchoToConsole = false;
-    export enum MessageType {
-        DECLARETEAM,
-        INTERCOM,
-        STATUS,
-        LOG,
-        HEARTBEAT,
-        ACKNOWLEDGE,
-        COMMAND,
-        PAYLOAD
-    }
 
 
     export enum LogLevel {
@@ -33,7 +23,31 @@ export const MESSAGE_KEYS : { [key: string]: string } = {
         K_STATUS_COUNT: "count",
         K_TEAM: "team",
     }
+    export enum MessageType {
+        DECLARETEAM,
+        INTERCOM,
+        STATUS,
+        LOG,
+        HEARTBEAT,
+        ACKNOWLEDGE,
+        COMMAND,
+        PAYLOAD
+    }
 
+    export function getMessageTypeLabel(mt: MessageType): string {
+        //due limitation of microbit
+        switch (mt) {
+            case MessageType.DECLARETEAM: return "DECLARETEAM";
+            case MessageType.INTERCOM: return "INTERCOM";
+            case MessageType.STATUS: return "STATUS";
+            case MessageType.LOG: return "LOG";
+            case MessageType.HEARTBEAT: return "HEARTBEAT";
+            case MessageType.ACKNOWLEDGE: return "ACKNOWLEDGE";
+            case MessageType.COMMAND: return "COMMAND";
+            case MessageType.PAYLOAD: return "PAYLOAD";
+            default: return "UNKNOWN";
+        }
+    }
     /**
      * Checks if a message is intended for this device.
      * @param kv Key-value pairs of the message to check
@@ -42,6 +56,7 @@ export const MESSAGE_KEYS : { [key: string]: string } = {
     export function isMessageForMe(kv: { [key: string]: string }): boolean {
         return (kv[MESSAGE_KEYS.K_TO] === deviceId || kv[MESSAGE_KEYS.K_TO] === "*")
     }
+    
     /**
      * Validates the structure of a received message : must contain from, to and type keys
      * @param kv Key-value pairs of the message to validate
@@ -81,20 +96,7 @@ export const MESSAGE_KEYS : { [key: string]: string } = {
         }
         return kv;
     }
-    export function getMessageTypeLabel(mt: MessageType): string {
-        //due limitation of microbit
-        switch (mt) {
-            case MessageType.DECLARETEAM: return "DECLARETEAM";
-            case MessageType.INTERCOM: return "INTERCOM";
-            case MessageType.STATUS: return "STATUS";
-            case MessageType.LOG: return "LOG";
-            case MessageType.HEARTBEAT: return "HEARTBEAT";
-            case MessageType.ACKNOWLEDGE: return "ACKNOWLEDGE";
-            case MessageType.COMMAND: return "COMMAND";
-            case MessageType.PAYLOAD: return "PAYLOAD";
-            default: return "UNKNOWN";
-        }
-    }
+
     let _initialized = false;
     let _radioLogLevel: LogLevel = LogLevel.Warning
     let _radioGroup: number
