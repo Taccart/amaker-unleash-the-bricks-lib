@@ -2,7 +2,7 @@
 // Library for Amaker Unleash The Bricks contest bot communication and status management
 // wrapper for UTBBotCode to be exposed in https://makecode.microbit.org/
 
-//% color=#300000 weight=1000 icon="\u25a3" 
+//% color=#4f0230 weight=1000 icon="\u26D0"
 namespace UTBBot {
 
 
