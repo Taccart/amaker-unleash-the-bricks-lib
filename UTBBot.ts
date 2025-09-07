@@ -5,11 +5,8 @@
 //% color=#300000 weight=1000 icon="\u25a3" 
 namespace UTBBot {
 
-    import LogLevel = UTBRadioCode.LogLevel;
-    import MessageType = UTBRadioCode.MessageType;
-    import IntercomType = UTBBotCode.IntercomType;
-    import TeamName = UTBBotCode.TeamName;
-    import BotStatus = UTBBotCode.BotStatus;
+
+
     import MESSAGE_KEYS = UTBRadioCode.MESSAGE_KEYS;
 
     
@@ -19,7 +16,7 @@ namespace UTBBot {
     //% teamName.defl=TeamName.UNDEFINED
     //% teamName.fieldEditor="gridpicker"
     //% teamName.fieldOptions.decompileLiterals=true
-    export function initAsBot(teamName: TeamName): void {
+    export function initAsBot(teamName: UTBBotCode.TeamName): void {
         UTBBotCode.initialize(teamName);
 
 
@@ -27,7 +24,7 @@ namespace UTBBot {
     //% group="Bot"
     //% blockId=contest_get_bot_status block="Get bot current status"
     //% advanced=true
-    export function getBotStatus(): BotStatus {
+    export function getBotStatus(): UTBBotCode.BotStatus {
         return UTBBotCode.getBotStatus();
     }
 
@@ -38,7 +35,7 @@ namespace UTBBot {
     export function onMessageStartReceived(callback: () => void) {
 
         UTBBotCode.setOnStartCallback(callback);
-        UTBBotCode.emitAcknowledgement(IntercomType.START);
+        UTBBotCode.emitAcknowledgement(UTBBotCode.IntercomType.START);
     }
     //% group="Bot"
     //% help=contest/on-stop-received
@@ -47,7 +44,7 @@ namespace UTBBot {
     export function onMessageStopReceived(callback: () => void) {
 
         UTBBotCode.setOnStopCallback(callback);
-        UTBBotCode.emitAcknowledgement(IntercomType.STOP);
+        UTBBotCode.emitAcknowledgement(UTBBotCode.IntercomType.STOP);
     }
     //% group="Bot"
     //% help=contest/on-danger_received
@@ -56,7 +53,7 @@ namespace UTBBot {
     export function onMessageDangerReceived(callback: () => void) {
 
         UTBBotCode.setOnDangerCallback(callback);
-        UTBBotCode.emitAcknowledgement(IntercomType.DANGER);
+        UTBBotCode.emitAcknowledgement(UTBBotCode.IntercomType.DANGER);
     }
 
     //% group="Bot"
@@ -68,7 +65,7 @@ namespace UTBBot {
     //% group="Bot
     //% blockId=contest_emit_acknowledgement block="Emit acknowledgement for $command"
     //% advanced=true
-    export function emitAcknowledgement(command: IntercomType) {
+    export function emitAcknowledgement(command: UTBBotCode.IntercomType) {
         UTBBotCode.emitAcknowledgement(command);
     }
 
@@ -86,7 +83,7 @@ namespace UTBBot {
     //% bot_status.fieldOptions.decompileLiterals=true
     //% group="conf"
     //% weight=20
-    export function newBotStatus(bot_status: BotStatus) {
+    export function newBotStatus(bot_status: UTBBotCode.BotStatus) {
         UTBBotCode.setBotStatus(bot_status);
 
     }
