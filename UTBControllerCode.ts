@@ -10,7 +10,7 @@ namespace UTBControllerCode {
 
     export function sendActionStart(): void {
         let msgObj = UTBRadioCode.createMessage()
-        msgObj[UTBRadioCode.MESSAGE_KEYS.K_TYPE] = UTBBotCode.getMessageTypeLabel(UTBRadioCode.MessageType.INTERCOM);
+        msgObj[UTBRadioCode.MESSAGE_KEYS.K_TYPE] = UTBRadioCode.getMessageTypeLabel(UTBRadioCode.MessageType.INTERCOM);
         msgObj[UTBRadioCode.MESSAGE_KEYS.K_PAYLOAD] = UTBBotCode.getIntercomLabel(UTBBotCode.IntercomType.START);
         console.log("Sending START action");
         UTBRadioCode.emitMessage(UTBRadioCode.buildMessage(msgObj));
@@ -18,7 +18,7 @@ namespace UTBControllerCode {
     }
     export function sendActionStop(): void {
         let msgObj = UTBRadioCode.createMessage()
-        msgObj[UTBRadioCode.MESSAGE_KEYS.K_TYPE] = UTBBotCode.getMessageTypeLabel(UTBRadioCode.MessageType.INTERCOM);
+        msgObj[UTBRadioCode.MESSAGE_KEYS.K_TYPE] = UTBRadioCode.getMessageTypeLabel(UTBRadioCode.MessageType.INTERCOM);
         msgObj[UTBRadioCode.MESSAGE_KEYS.K_PAYLOAD] = UTBBotCode.getIntercomLabel(UTBBotCode.IntercomType.STOP);
         console.log("Sending STOP action");
         UTBRadioCode.emitMessage(UTBRadioCode.buildMessage(msgObj));
@@ -26,7 +26,7 @@ namespace UTBControllerCode {
     }
     export function sendActionDanger(): void {
         let msgObj = UTBRadioCode.createMessage()
-        msgObj[UTBRadioCode.MESSAGE_KEYS.K_TYPE] = UTBBotCode.getMessageTypeLabel(UTBRadioCode.MessageType.INTERCOM);
+        msgObj[UTBRadioCode.MESSAGE_KEYS.K_TYPE] = UTBRadioCode.getMessageTypeLabel(UTBRadioCode.MessageType.INTERCOM);
         msgObj[UTBRadioCode.MESSAGE_KEYS.K_PAYLOAD] = UTBBotCode.getIntercomLabel(UTBBotCode.IntercomType.DANGER);
         console.log("Sending DANGER action");
         UTBRadioCode.emitMessage(UTBRadioCode.buildMessage(msgObj));

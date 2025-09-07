@@ -3,6 +3,7 @@
 // Typescript code adapted to micro:bit limitations
 
 namespace UTBBotCode {
+
     export enum BotStatus     {
         BringBack,
         Capture,
@@ -89,7 +90,7 @@ namespace UTBBotCode {
     }
 
     // Use a plain object with string keys for micro:bit compatibility
-    function getTeamNameLabel(tn: TeamName): string {
+    export function getTeamNameLabel(tn: TeamName): string {
         switch (tn) {
             case TeamName.AmaBot: return "AmaBot";
             case TeamName.BridgeTheBrick: return "BridgeTheBrick";
@@ -100,6 +101,18 @@ namespace UTBBotCode {
             case TeamName.Terminator: return "Terminator";
             case TeamName.TeslaCybertruck: return "TeslaCybertruck";
             case TeamName.UNDEFINED: return "UNDEFINED";
+            default: return "UNKNOWN";
+        }
+    }
+    export function getIntercomLabel(itc: IntercomType): string {
+        switch (itc) {
+            case IntercomType.HEARTBEAT: return "HEARTBEAT";
+            case IntercomType.STATUS: return "STATUS";
+            case IntercomType.START: return "START";
+            case IntercomType.STOP: return "STOP";
+            case IntercomType.DANGER: return "DANGER";
+            case IntercomType.OBEYME: return "OBEYME";
+            case IntercomType.IOBEY: return "IOBEY";
             default: return "UNKNOWN";
         }
     }
@@ -119,12 +132,14 @@ namespace UTBBotCode {
         msgObj[MESSAGE_KEYS.K_TEAM] = getTeamNameLabel(_team);
         return msgObj;
     }
+
     export function emitTeamName(tn: TeamName) {
         let msgObj = createMessage();
         msgObj[MESSAGE_KEYS.K_TYPE] = UTBRadioCode.getMessageTypeLabel(MessageType.DECLARETEAM);
         msgObj[MESSAGE_KEYS.K_TEAM] = getTeamNameLabel(tn);
         UTBRadioCode.emitMessage(UTBRadioCode.buildMessage(msgObj));
     }
+    
     export function emitStatus() {
         let msgObj = createMessage();
         msgObj[MESSAGE_KEYS.K_TYPE] = UTBRadioCode.getMessageTypeLabel(MessageType.STATUS);
@@ -133,19 +148,7 @@ namespace UTBBotCode {
         msgObj[MESSAGE_KEYS.K_TEAM] = getTeamNameLabel(_team);
         UTBRadioCode.emitMessage(UTBRadioCode.buildMessage(msgObj));
     }
-    export function onReceivedString(s: string) : void {
-
-        const kv = UTBRadioCode.getIntercom(s);
-        if (!kv) return;
-
-        switch (kv[MESSAGE_KEYS.K_TYPE]) {
-            case "START": _callbacks.onStart(); break;
-            case "STOP": _callbacks.onStop(); break;
-            case "DANGER": _callbacks.onDanger(); break;
-            case "OBEYME": _callbacks.onObeyMe(kv[MESSAGE_KEYS.K_FROM]); break;
-            default: {
-                console.log(`Unhandled intercom: ${kv[MESSAGE_KEYS.K_TYPE]}`);
-
+    
     export function resetCollectCount() {
         _collectedBallsCount = 0;
     }
