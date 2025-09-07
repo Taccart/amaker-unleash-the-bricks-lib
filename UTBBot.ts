@@ -68,14 +68,13 @@ namespace UTBBot {
 
     //% group="Bot"getIntercomType
     //% blockId=contest_emit_status block="Emit bot status"
-
     export function emitStatus() {
         UTBBotCode.emitStatus();
     }
 
     //% group="Bot"
-    //% blockId=contest_bot_status block="Set and emit bot status to $bot_status" blockGap=16
-    //% bot_status.defl=BotStatus.Idle
+    //% blockId=contest_bot_status block="Change bot status to $bot_status" blockGap=16
+    //% bot_status.defl=UTBBotCode.BotStatus.Idle
     //% bot_status.fieldEditor="gridpicker"
     //% bot_status.fieldOptions.decompileLiterals=true
     //% group="conf"
