@@ -3,7 +3,8 @@
 // wrapper for UTBBotCode to be exposed in https://makecode.microbit.org/
 
 //% color=#300000 weight=1000 icon="\u25a3" groups='["Amaker", "Communication"]'
-namespace UTBBot {
+namespace aMakerUTB {
+
     import LogLevel = UTBRadioCode.LogLevel;
     import MessageType = UTBRadioCode.MessageType;
     import IntercomType = UTBBotCode.IntercomType;
@@ -20,7 +21,7 @@ namespace UTBBot {
 
     }
 
-    //% group="Contest"
+    //% group="Bot"
     //% weight=1000
     //% blockId=conf_init_communication_channel block="Set bot team %teamName"
     //% teamName.defl=TeamName.UNDEFINED
@@ -31,14 +32,14 @@ namespace UTBBot {
 
 
     }
-
+    //% group="Bot"
     //% blockId=contest_get_bot_status block="Get bot current status"
     //% advanced=true
     export function getBotStatus(): BotStatus {
         return UTBBotCode.getBotStatus();
     }
 
-    // Event handlers
+    //% group="Bot"
     //% help=contest/on-received-start
     //% blockId=contest_on_start_received block="on Start"
     //% group="events"
@@ -47,7 +48,7 @@ namespace UTBBot {
         UTBBotCode.setOnStartCallback(callback);
         emitAcknowledgement(IntercomType.START);
     }
-
+    //% group="Bot"
     //% help=contest/on-stop-received
     //% blockId=contest_on_stop_received block="on Stop"
     //% group="events"
@@ -56,7 +57,7 @@ namespace UTBBot {
         UTBBotCode.setOnStopCallback(callback);
         emitAcknowledgement(IntercomType.STOP);
     }
-
+    //% group="Bot"
     //% help=contest/on-danger_received
     //% blockId=contest_on_danger_received block="on Danger"
     //% group="events"
@@ -65,21 +66,21 @@ namespace UTBBot {
         UTBBotCode.setOnDangerCallback(callback);
         emitAcknowledgement(IntercomType.DANGER);
     }
-
+    //% group="Bot"
     //% blockId=contest_emit_acknowledgement block="Emit acknowledgement for $command"
     //% group="Communication"
     //% advanced=true
     export function emitAcknowledgement(command: IntercomType) {
         UTBBotCode.emitAcknowledgement(command);
     }
-
+    //% group="Bot"
     //% blockId=contest_emit_status block="Emit bot status"
     //% group="Communication"
     //% advanced=true
     export function emitStatus() {
         UTBBotCode.emitStatus();
     }
-
+    //% group="Bot"
     //% blockId=contest_bot_status block="Set and emit bot status to $bot_status" blockGap=16
     //% bot_status.defl=BotStatus.Idle
     //% bot_status.fieldEditor="gridpicker"
@@ -90,12 +91,12 @@ namespace UTBBot {
         UTBBotCode.setBotStatus(bot_status);
 
     }
-
+    //% group="Bot"
     //% blockId=contest_get_collected_balls_count block="Get collect count"
     export function getCollectedBallsCount(): number {
         return UTBBotCode.getCollectedBallsCount();
     }
-
+    //% group="Bot"
     //% blockId=contest_increment_collected_balls_count block="Increment collect count by $n"
     //% n.defl=1
     export function incrementCollectedBallsCount(n: number): number {
@@ -103,3 +104,4 @@ namespace UTBBot {
         return getCollectedBallsCount();
     }
 }
+
