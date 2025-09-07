@@ -1,11 +1,9 @@
 {
-    "name": "amaker-unleash-the-bricks-lib",
+    "name": "amaker-utb-lib",
     "version": "2025.9.7",
     "description": "aMaker's Unleash the bricks library for micro:bit",
     "author": "Th. Accart",
     "license": "MIT",
-    
-    "icon": "icon.png",
     "dependencies": {
         "core": "*",
         "radio": "*",
@@ -13,6 +11,8 @@
 
     },
     "files": [
+        "README.md",
+        "main.ts",
         "UTBBot.ts",
         "UTBBotCode.ts",
         "UTBController.ts",
@@ -21,20 +21,6 @@
         "UTBRadioCode.ts"
     ],
     "testFiles": [
-        "unleashTheBricks.test.ts"
     ],
-    "public": true,
-    "supportedTargets": [
-        "microbit"
-    ],
-    "preferredEditor": "tsprj",
-    "yotta": {
-        "config": {
-            "microbit-dal": {
-                "bluetooth": {
-                    "enabled": 0
-                }
-            }
-        }
-    }
+    "public": false
 }

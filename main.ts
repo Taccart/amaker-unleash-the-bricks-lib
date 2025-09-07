@@ -5,8 +5,6 @@
 //% color=#300000 weight=1000 icon="\u25a3" groups='["Amaker", "Communication"]'
 namespace aMakerUTB {
 
-    import LogLevel = UTBRadioCode.LogLevel;
-    import MessageType = UTBRadioCode.MessageType;
     import IntercomType = UTBBotCode.IntercomType;
     import TeamName = UTBBotCode.TeamName;
     import BotStatus = UTBBotCode.BotStatus;
