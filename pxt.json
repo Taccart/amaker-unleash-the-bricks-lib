@@ -18,7 +18,8 @@
         "UTBControllerCode.ts",
         "UTBRadio.ts",
         "UTBRadioCode.ts",
-        "main.py"
+        "main.py",
+        "main.blocks"
     ],
     "testFiles": [],
     "public": false,
