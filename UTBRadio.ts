@@ -21,35 +21,14 @@ namespace UTBRadio {
         UTBRadioCode.emitHeartBeat();
     }
         //% group="Common"
-    //% blockId=contest_emit_log block="Emit log level $level with message $message" 
-    //% level.defl=UTBRadioCode.LogLevel.Info
-    //% level.fieldEditor="gridpicker"
-    //% level.fieldOptions.decompileLiterals=true
-    //% weight=100
-    export function emitLog(level: UTBRadioCode.LogLevel, message: string) {
-        UTBRadioCode.emitLog(level, message);
+    //% blockId=contest_emit_log block="Emit log with message $message" 
+    export function emitLog( message: string) {
+        UTBRadioCode.emitLog( message);
     }
 
 
-    /**
-        * Gets the selected log level.
-        * @param ll The log level to select.
-        */
-           //% group="Common"
-    //% blockId=utb_get _log_level block="get log level" advanced=true
-    export function getLogLevel(): UTBRadioCode.LogLevel {
-        return UTBRadioCode.getLogLevel();
-    }
+
     
-    //% group="Common"
-    //% blockId=utb_set_log_level block="set log level %ll" advanced=true
-    //% ll.defl=UTBRadioCode.LogLevel.Info
-    //% ll.fieldEditor="gridpicker"
-    //% ll.fieldOptions.decompileLiterals=true
-    //% description="Set the log level for radio logs."
-    export function setLogLevel(ll: UTBRadioCode.LogLevel) {
-        UTBRadioCode.setLogLevel(ll);
-    }
 
     //% group="Common"
     //% blockId=utb_set_radio_group block="set radio group %group"

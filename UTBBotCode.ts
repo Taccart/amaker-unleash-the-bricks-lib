@@ -16,20 +16,6 @@ namespace UTBBotCode {
         Steal
     }
 
-    export function getBotStatusLabel(bs: number): string {
-        switch (bs) {
-            case BotStatus.BringBack: return "Bring back"; break;
-            case BotStatus.Capture: return "Capture"; break;
-            case BotStatus.Defend: return "Defend"; break;
-            case BotStatus.Idle: return "Idle"; break;
-            case BotStatus.ToShelter: return "Back to shelter"; break;
-            case BotStatus.Messing: return "Messing"; break;
-            case BotStatus.Other: return "Other"; break;
-            case BotStatus.Search: return "Searching"; break;
-            case BotStatus.Steal: return "Stealing"; break;
-            default: return "UNKNOWN"; break;
-        }
-    }
     export enum TeamName {
         AmaBot ,
         BridgeTheBrick,
@@ -50,31 +36,17 @@ namespace UTBBotCode {
         OBEYME,
         IOBEY
     }
-    import LogLevel = UTBRadioCode.LogLevel;
-    import MessageType = UTBRadioCode.MessageType;
-    const MESSAGE_KEYS = UTBRadioCode.MESSAGE_KEYS;
     let _team: TeamName = TeamName.UNDEFINED;
     let _controllerName: string;
     let _collectedBallsCount = 0;
     let _botStatus: BotStatus = BotStatus.Idle;
-
-
-
-    // State variables (with clearer naming)
-
-
     let _isInitialized = false;
-    
-    
-
-
     let _callbacks: CommandHandlerMap = {
         onStart: () => { console.log("Missing onStart callback function"); },
         onStop: () => { console.log("Missing onStop callback function"); },
         onDanger: () => { console.log("Missing onDanger callback function"); },
         onObeyMe: (name: string) => UTBBotCode.registerControllerName(name) 
     };
-    
     
     type CommandHandlerMap = {
         onStart: () => void;
@@ -83,7 +55,7 @@ namespace UTBBotCode {
         onObeyMe: (from: string) => void;
     };
     export function initialize(team: TeamName): void {
-        UTBRadioCode.debug_message("I'M A BOT")
+
         _team = team;
         UTBRadioCode.init();
         radio.onReceivedString(onReceivedString);
@@ -95,6 +67,21 @@ namespace UTBBotCode {
     }
 
     // Use a plain object with string keys for micro:bit compatibility
+
+    export function getBotStatusLabel(bs: number): string {
+        switch (bs) {
+            case BotStatus.BringBack: return "Bring back"; break;
+            case BotStatus.Capture: return "Capture"; break;
+            case BotStatus.Defend: return "Defend"; break;
+            case BotStatus.Idle: return "Idle"; break;
+            case BotStatus.ToShelter: return "Back to shelter"; break;
+            case BotStatus.Messing: return "Messing"; break;
+            case BotStatus.Other: return "Other"; break;
+            case BotStatus.Search: return "Searching"; break;
+            case BotStatus.Steal: return "Stealing"; break;
+            default: return "UNKNOWN"; break;
+        }
+    }
     export function getTeamNameLabel(tn: TeamName): string {
         switch (tn) {
             case TeamName.AmaBot: return "AmaBot";
@@ -130,70 +117,52 @@ namespace UTBBotCode {
     export function setOnDangerCallback(f: () => void) {
         _callbacks.onDanger = f;
     }
-    // Bot-specific message creation using UTBRadioCode utilities
-    export function createMessage(): { [key: string]: string } {
-        let msgObj = UTBRadioCode.createMessage();
-        msgObj[MESSAGE_KEYS.K_TO] = _controllerName ? _controllerName : "*";
-        msgObj[MESSAGE_KEYS.K_TEAM] = getTeamNameLabel(_team);
-        return msgObj;
-    }
 
     export function emitTeamName(tn: TeamName):boolean {
-        let msgObj = createMessage();
-        msgObj[MESSAGE_KEYS.K_TYPE] = UTBRadioCode.getMessageTypeLabel(MessageType.DECLARETEAM);
-        msgObj[MESSAGE_KEYS.K_TEAM] = getTeamNameLabel(tn);
-        return UTBRadioCode.emitMessage(UTBRadioCode.buildMessage(msgObj));
+        const msg = new UTBRadioCode.RadioMessage(UTBRadioCode.MessageType.LOG, getTeamNameLabel(tn));
+        return  UTBRadioCode.emitString(msg.encode());
     }
     
     export function emitStatus() :boolean{
-        let msgObj = createMessage();
-        msgObj[MESSAGE_KEYS.K_TYPE] = UTBRadioCode.getMessageTypeLabel(MessageType.STATUS);
-        msgObj[MESSAGE_KEYS.K_STATUS_COUNT] = _collectedBallsCount.toString();
-        msgObj[MESSAGE_KEYS.K_STATUS_STATE] = _botStatus.toString();
-        msgObj[MESSAGE_KEYS.K_TEAM] = getTeamNameLabel(_team);
-        return UTBRadioCode.emitMessage(UTBRadioCode.buildMessage(msgObj));
+        const msg = new UTBRadioCode.RadioMessage(UTBRadioCode.MessageType.STATUS,  getBotStatusLabel(getBotStatus()));
+        return  UTBRadioCode.emitString(msg.encode());
+    
     }
     
     export function resetCollectCount() {
         _collectedBallsCount = 0;
     }
     export function emitAcknowledgement(itc: IntercomType) :boolean{
-        if (_controllerName) {
-            let msgObj = UTBRadioCode.createMessage();
-            msgObj[MESSAGE_KEYS.K_TYPE] = UTBRadioCode.getMessageTypeLabel(MessageType.ACKNOWLEDGE);
-            msgObj[MESSAGE_KEYS.K_PAYLOAD] = itc.toString();
-            return UTBRadioCode.emitMessage(UTBRadioCode.buildMessage(msgObj));
+
+        const msg = new UTBRadioCode.RadioMessage(UTBRadioCode.MessageType.ACKNOWLEDGE,  getIntercomLabel(itc));
+        return  UTBRadioCode.emitString(msg.encode());
+        UTBRadioCode.emitLog("IOBEY" + _controllerName );
+
             
-        } else {
-            UTBRadioCode.emitLog(LogLevel.Warning, `Cannot send acknowledgement for ${getIntercomLabel(itc)}: No controller registered`);
-            return false
-        }
     }
 
     export function registerControllerName(name: string) {
         if (!_controllerName) {
             _controllerName = name;
-            UTBRadioCode.emitLog(LogLevel.Info, "Controller registered as " + _controllerName);
             emitAcknowledgement(IntercomType.IOBEY);
         } else {
-            UTBRadioCode.emitLog(LogLevel.Warning, "Controller already registered as " + _controllerName + ". Request DENIED for " + name);
+            UTBRadioCode.emitLog("IOBEYTO" + _controllerName +"DENY"+name);
         }
     }
     
     
     
     export function onReceivedString(s: string) : void {
-        UTBRadioCode.debug_message(`Received string ${s}`)
-        const kv = UTBRadioCode.getIntercom(s);
-        if (!kv) return;
+        const rmsg: UTBRadioCode.RadioMessage= UTBRadioCode.RadioMessage.decode(s);
+        if (!rmsg || rmsg.type !== UTBRadioCode.MessageType.INTERCOM) return ;
 
-        switch (kv[MESSAGE_KEYS.K_TYPE]) {
-            case "START": _callbacks.onStart(); break;
-            case "STOP": _callbacks.onStop(); break;
-            case "DANGER": _callbacks.onDanger(); break;
-            case "OBEYME": _callbacks.onObeyMe(kv[MESSAGE_KEYS.K_FROM]); break;
+        switch (rmsg.payload) {
+            case UTBControllerCode.COMMAND_START: _callbacks.onStart(); break;
+            case UTBControllerCode.COMMAND_STOP: _callbacks.onStop(); break;
+            case UTBControllerCode.COMMAND_DANGER: _callbacks.onDanger(); break;
+            case UTBControllerCode.COMMAND_OBEYME: _callbacks.onObeyMe(rmsg.from); break;
             default: {
-                console.log(`Unhandled intercom: ${kv[MESSAGE_KEYS.K_TYPE]}`);
+                console.log(`Unhandled intercom: ${rmsg.payload}`);
                 break;
             }
         }
