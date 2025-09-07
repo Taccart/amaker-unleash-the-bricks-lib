@@ -12,7 +12,7 @@ namespace UTBRadioCode {
         Error = 40,
         Critical = 50,
     }
-export const MESSAGE_KEYS : { [key: string]: string } = {
+    export const MESSAGE_KEYS : { [key: string]: string } = {
         K_FROM: "from",
         K_TO: "to",
         K_TIMESTAMP: "ts",

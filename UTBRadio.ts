@@ -16,13 +16,13 @@ namespace UTBRadio {
         UTBRadioCode.init(radioGroup);
     }
     //% group="Common"
-    //% blockId=contest_emit_heart_beat block="Emit heart beat" group="contest" 
+    //% blockId=contest_emit_heart_beat block="Emit heart beat" 
     //% advanced=true
     export function emitHeartBeat() {
         UTBRadioCode.emitHeartBeat();
     }
-    // Communication functions
-    //% blockId=contest_emit_log block="Emit log level $level with message $message" group="contest"
+        //% group="Common"
+    //% blockId=contest_emit_log block="Emit log level $level with message $message" 
     //% level.defl=LogLevel.Info
     //% level.fieldEditor="gridpicker"
     //% level.fieldOptions.decompileLiterals=true
@@ -34,6 +34,7 @@ namespace UTBRadio {
      * Gets the selected message type.
      * @param mt The message type to select.
      */
+        //% group="Common"
     //% blockId=utb_message_type block="message type %mt" advanced=true
     export function getMessageType(mt: MessageType): MessageType {
         return mt;
@@ -46,6 +47,7 @@ namespace UTBRadio {
         * Gets the selected log level.
         * @param ll The log level to select.
         */
+           //% group="Common"
     //% blockId=utb_get _log_level block="get log level" advanced=true
     export function getLogLevel(): LogLevel {
         return UTBRadioCode.getLogLevel();
@@ -69,7 +71,7 @@ namespace UTBRadio {
     }
 
     //% group="Common"
-    //% blockId=utb_get_radio_group block="get radio group"advanced=true
+    //% blockId=utb_get_radio_group block="get radio group" advanced=true
     //% weight=90
     export function getRadioGroup(): number {
         return UTBRadioCode.getRadioGroup();
