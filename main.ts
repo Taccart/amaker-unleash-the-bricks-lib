@@ -1,9 +1,8 @@
 // main.ts 
 // Amaker Unleash The Bricks 2025 
-
+//% color=#300000 weight=1000 icon="\u25a3" 
 namespace amakerUTB2025  {
-    import LogLevel = UTBRadioCode.LogLevel;
-    import MessageType = UTBRadioCode.MessageType;
+
     import IntercomType = UTBBotCode.IntercomType;
     import TeamName = UTBBotCode.TeamName;
     import BotStatus = UTBBotCode.BotStatus;
