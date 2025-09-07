@@ -4,6 +4,7 @@
 
 //% color=#300000 weight=1000 icon="\u25a3" groups='["Amaker", "Communication"]'
 namespace UTBBot {
+    /*
     import LogLevel = UTBRadioCode.LogLevel;
     import MessageType = UTBRadioCode.MessageType;
     import IntercomType = UTBBotCode.IntercomType;
@@ -16,7 +17,7 @@ namespace UTBBot {
     //% weight=1000
     //% blockId=conf_init_communication_channel block="Initialize as bot, team is %teamName"
     //% teamName.defl=TeamName.UNDEFINED
-    //% teamName.fieldEditor="gridpicker"_(team
+    //% teamName.fieldEditor="gridpicker"
     //% teamName.fieldOptions.decompileLiterals=true
     export function initAsBot(teamName: TeamName): void {
         UTBBotCode.initialize(teamName);
@@ -112,5 +113,6 @@ namespace UTBBot {
     //% advanced=true
     export function getCollectedBallsCount(): number {
         return UTBBotCode.getCollectedBallsCount();
-    }
+    }*/
+   
 }
