@@ -41,6 +41,7 @@ namespace UTBBotCode {
     let _collectedBallsCount = 0;
     let _botStatus: BotStatus = BotStatus.Idle;
     let _isInitialized = false;
+
     let _callbacks: CommandHandlerMap = {
         onStart: () => { console.log("Missing onStart callback function"); },
         onStop: () => { console.log("Missing onStop callback function"); },
@@ -136,16 +137,19 @@ namespace UTBBotCode {
 
         const msg = new UTBRadioCode.RadioMessage(UTBRadioCode.MessageType.ACKNOWLEDGE,  getIntercomLabel(itc));
         return  UTBRadioCode.emitString(msg.encode());
-        UTBRadioCode.emitLog("IOBEY" + _controllerName );
+        UTBRadioCode.emitLog("IOBEYTO" + _controllerName );
 
             
     }
 
     export function registerControllerName(name: string) {
+
         if (!_controllerName) {
             _controllerName = name;
+            console.log(`My controller is now ${_controllerName}`)
             emitAcknowledgement(IntercomType.IOBEY);
         } else {
+            console.log(`My controller is already  ${_controllerName} : I deny order from ${name}`)
             UTBRadioCode.emitLog("IOBEYTO" + _controllerName +"DENY"+name);
         }
     }
@@ -154,13 +158,25 @@ namespace UTBBotCode {
     
     export function onReceivedString(s: string) : void {
         const rmsg: UTBRadioCode.RadioMessage= UTBRadioCode.RadioMessage.decode(s);
-        if (!rmsg || rmsg.type !== UTBRadioCode.MessageType.INTERCOM) return ;
+        if (!rmsg || rmsg.type !== UTBRadioCode.MessageType.INTERCOM) {
+            console.log(`Not in intercom : I don't care`)
+            return ;}
 
+        if  (rmsg.payload===UTBControllerCode.COMMAND_OBEYME) {
+          _callbacks.onObeyMe(rmsg.from); 
+          return}
+
+        if (rmsg.from !== _controllerName) 
+        {
+            console.log(`Intercom emitted by illegitimate source ${rmsg.from} - my controller is ${_controllerName}`);
+            return
+        }
+        
         switch (rmsg.payload) {
             case UTBControllerCode.COMMAND_START: _callbacks.onStart(); break;
             case UTBControllerCode.COMMAND_STOP: _callbacks.onStop(); break;
             case UTBControllerCode.COMMAND_DANGER: _callbacks.onDanger(); break;
-            case UTBControllerCode.COMMAND_OBEYME: _callbacks.onObeyMe(rmsg.from); break;
+            
             default: {
                 console.log(`Unhandled intercom: ${rmsg.payload}`);
                 break;

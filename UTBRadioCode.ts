@@ -6,14 +6,14 @@ namespace UTBRadioCode {
     let _initialized = false;
     let _radioGroup: number
     const MSG_ID_START=0
-    const MSG_ID_END=4
-    const MSG_TYPE_START = MSG_ID_END+1
-    const MSG_TYPE_END=MSG_TYPE_START+1
-    const MSG_PAYLOAD_START = MSG_TYPE_END+1
-    const MSG_PAYLOAD_END = 19
+    const MSG_ID_LEN=5
+    const MSG_TYPE_START = MSG_ID_START + MSG_ID_LEN
+    const MSG_TYPE_LEN = 1
+    const MSG_PAYLOAD_START = MSG_TYPE_START + MSG_TYPE_LEN
+    const MSG_PAYLOAD_LEN = 13
     const RADIO_GROUP = { MIN: 0, MAX: 8 };
 
-    export const deviceId = control.deviceName().substring(0, 5);
+    export const deviceId = control.deviceName().substr(0, 5);
     /**
      *  radio message have a max size of 19 char.
     *  we will encode them as <<device id (5         char)>.<msg type 1 char><payload (13 char)>>
@@ -50,22 +50,26 @@ namespace UTBRadioCode {
         type: MessageType;
         payload: string;
 
-        constructor(type: MessageType,payload: string="", from:string=deviceId) {
-            this.from = from;
+        constructor(type: MessageType,payload: string=null, from:string=null) {
+            this.from = from?from:deviceId;
             this.type = type;
-            this.payload = payload;
+            this.payload = payload?payload:"";
         }
 
         encode(): string {
             return `${this.from}${this.type}${this.payload}`;
         }
         static decode(msg: string): RadioMessage|null {
-            if (msg.length < MSG_PAYLOAD_START) return null;
-            const from = msg.substring(MSG_ID_START, MSG_ID_END);
+            console.log (`decoding string ${msg}`)
+            if (msg.length < MSG_TYPE_LEN+MSG_ID_LEN) return null;
+            const from = msg.substr(MSG_ID_START, MSG_ID_LEN);
+            console.log(`from =  ${from}`)
             let mtInt = parseInt(msg.charAt(5));
+            console.log(`mtInt =  ${mtInt}`)
             if (isNaN(mtInt) || mtInt < 0 || mtInt > 7) mtInt = null;
             
-            const payload = msg.substring(MSG_PAYLOAD_START, MSG_PAYLOAD_END);
+            const payload = msg.substr(MSG_PAYLOAD_START, MSG_PAYLOAD_LEN);
+            console.log(`payload =  ${payload}`)
             return new RadioMessage( mtInt, payload, from);
         }
     
@@ -119,7 +123,7 @@ namespace UTBRadioCode {
         }
         if (msg.length>19) {
             console.warn(`emitString: message too long (${msg}`);
-            msg=msg.substring(0,19);
+            msg=msg.substr(0,20);
             
         }
 
