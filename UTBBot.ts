@@ -2,9 +2,9 @@
 // Library for Amaker Unleash The Bricks contest bot communication and status management
 // wrapper for UTBBotCode to be exposed in https://makecode.microbit.org/
 
-//% color=#300000 weight=1000 icon="\u25a3" groups='["Amaker", "Communication"]'
+//% color=#300000 weight=1000 icon="\u25a3" 
 namespace UTBBot {
-    /*
+
     import LogLevel = UTBRadioCode.LogLevel;
     import MessageType = UTBRadioCode.MessageType;
     import IntercomType = UTBBotCode.IntercomType;
@@ -113,6 +113,6 @@ namespace UTBBot {
     //% advanced=true
     export function getCollectedBallsCount(): number {
         return UTBBotCode.getCollectedBallsCount();
-    }*/
+    }
    
 }
