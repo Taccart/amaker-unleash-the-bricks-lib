@@ -37,7 +37,7 @@ namespace UTBBot {
     export function onMessageStartReceived(callback: () => void) {
 
         UTBBotCode.setOnStartCallback(callback);
-        emitAcknowledgement(IntercomType.START);
+        UTBBotCode.emitAcknowledgement(IntercomType.START);
     }
     //% group="Bot"
     //% help=contest/on-stop-received
@@ -46,7 +46,7 @@ namespace UTBBot {
     export function onMessageStopReceived(callback: () => void) {
 
         UTBBotCode.setOnStopCallback(callback);
-        emitAcknowledgement(IntercomType.STOP);
+        UTBBotCode.emitAcknowledgement(IntercomType.STOP);
     }
     //% group="Bot"
     //% help=contest/on-danger_received
@@ -55,7 +55,7 @@ namespace UTBBot {
     export function onMessageDangerReceived(callback: () => void) {
 
         UTBBotCode.setOnDangerCallback(callback);
-        emitAcknowledgement(IntercomType.DANGER);
+        UTBBotCode.emitAcknowledgement(IntercomType.DANGER);
     }
 
     //% group="Bot"
