@@ -30,6 +30,6 @@
     "supportedTargets": [
         "microbit"
     ],
-    "preferredEditor": "blocksprj",
+    "preferredEditor": "tsprj",
     "author": "Th. Accart"
 }

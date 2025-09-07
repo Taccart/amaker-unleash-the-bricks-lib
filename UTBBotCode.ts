@@ -83,9 +83,11 @@ namespace UTBBotCode {
         onObeyMe: (from: string) => void;
     };
     export function initialize(team: TeamName): void {
+        UTBRadioCode.debug_message("I'M A BOT")
         _team = team;
         UTBRadioCode.init();
         radio.onReceivedString(onReceivedString);
+        
         _isInitialized = true;
     }
     export function isInitialized(): boolean {
@@ -179,7 +181,7 @@ namespace UTBBotCode {
     
     
     export function onReceivedString(s: string) : void {
-
+        UTBRadioCode.debug_message(`Received string ${s}`)
         const kv = UTBRadioCode.getIntercom(s);
         if (!kv) return;
 

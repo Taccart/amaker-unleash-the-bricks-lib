@@ -4,9 +4,14 @@
 namespace UTBControllerCode {
 
     export function initialize(): void {
+        UTBRadioCode.debug_message("I'M CONTROLLER")
         UTBRadioCode.init();
+        sendObeyMe()
+        radio.onReceivedString(onRadioReceivedString)
     }
+
     export function onRadioReceivedString(receivedString: string): void {
+        
         serial.writeString(receivedString + serial.NEW_LINE);
     }
 

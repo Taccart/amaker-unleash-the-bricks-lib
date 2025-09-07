@@ -4,6 +4,7 @@
 namespace UTBRadioCode {
 
     const _isDebug =true;
+    const FS="|"
     export enum LogLevel {
         Debug = 10,
         Info = 20,
@@ -152,8 +153,8 @@ namespace UTBRadioCode {
 
     // Shared utility functions
     export function parseMessage(msg: string): { [key: string]: string } {
-        debug_message(`parseMessage from "${msg}`)
-        const parts = msg.split(";");
+        debug_message(`parse Message from "${msg}`)
+        const parts = msg.split(FS);
         const result: { [key: string]: string } = {};
         for (const part of parts) {
             const [key, value] = part.split("=");
@@ -167,7 +168,7 @@ namespace UTBRadioCode {
     export function buildMessage(obj: { [key: string]: string }): string {
         return Object.keys(obj)
             .map(key => `${key}=${obj[key]}`)
-            .join(";");
+            .join(FS);
     }
 
 
