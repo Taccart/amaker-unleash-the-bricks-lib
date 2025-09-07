@@ -29,7 +29,13 @@ This part is only for the controller board (one per arena), which makes the link
 
 * open [https://makecode.microbit.org/](https://makecode.microbit.org/)
 * import **https://github.com/taccart/amaker-unleash-the-geek-lib**
-You will see demonstration code.
+
+You will see demonstration code:
+The microbit receiving this code will start as a bot.
+- Button A
+- Button B
+- Button A+B
+- background loop emits status every 5000ms
 
 
 #### Metadata (used for search, rendering)
