@@ -93,12 +93,12 @@ namespace UTBBot {
     }
 
     //% group="Bot"
-    //% blockId=utb_device_name block="device name"
+    //% blockId=utb_device_name block="device Id "
     //% group="Bot"
     //% description="Returns a unique device name based on device name and serial number"
     //% advanced=true
-    export function getDeviceName(): string {
-        return control.deviceName() + "." + control.deviceSerialNumber().toString();
+    export function getDeviceId(): string {
+        return UTBRadioCode.deviceId
 
     }
     //% group="Bot"

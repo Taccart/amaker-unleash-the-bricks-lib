@@ -4,8 +4,16 @@ UTBBot.onMessageStopReceived(function () {
     basic.showIcon(IconNames.No)
 })
 input.onLogoEvent(TouchButtonEvent.LongPressed, function () {
+    basic.showIcon(IconNames.Sad)
     debugmsg("onLogo LongPressed : sendActionStop ")
     UTBController.sendActionStop()
+    basic.showLeds(`
+        . . . . .
+        . # . # .
+        . . . . .
+        . # # # .
+        . # # # .
+        `)
 })
 UTBBot.onMessageDangerReceived(function () {
     debugmsg("onMessageDangerReceived")
@@ -23,9 +31,9 @@ function debugmsg (msg: string) {
 }
 input.onButtonPressed(Button.AB, function () {
     debugmsg("onButton A+B: newBotStatus Messing")
-    basic.showIcon(IconNames.Diamond)
+    basic.showIcon(IconNames.Square)
     UTBBot.newBotStatus(UTBBotCode.BotStatus.Messing)
-    basic.showIcon(IconNames.SmallDiamond)
+    basic.showIcon(IconNames.SmallSquare)
 })
 input.onButtonPressed(Button.B, function () {
     debugmsg("onButton B: emitStatus")
@@ -36,11 +44,20 @@ input.onButtonPressed(Button.B, function () {
 input.onLogoEvent(TouchButtonEvent.Touched, function () {
     debugmsg("onLogo Touched : sendActionDanger")
     UTBController.sendActionDanger()
+    basic.showString(UTBBot.getDeviceId())
 })
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
+    basic.showIcon(IconNames.Happy)
     debugmsg("onLogo Pressed : sendActionStart")
     UTBController.initAsController()
     UTBController.sendActionStart()
+    basic.showLeds(`
+        . . . . .
+        . # . # .
+        . . . . .
+        . # # # .
+        . # # # .
+        `)
 })
 UTBBot.onMessageStartReceived(function () {
     debugmsg("onMessageStartReceived")
