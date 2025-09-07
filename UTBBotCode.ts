@@ -65,6 +65,7 @@ namespace UTBBotCode {
 
     let _isInitialized = false;
     
+    
 
 
     let _callbacks: CommandHandlerMap = {
@@ -73,6 +74,7 @@ namespace UTBBotCode {
         onDanger: () => { console.log("Missing onDanger callback function"); },
         onObeyMe: (name: string) => UTBBotCode.registerControllerName(name) 
     };
+    
     
     type CommandHandlerMap = {
         onStart: () => void;
@@ -173,6 +175,8 @@ namespace UTBBotCode {
         }
     }
     
+    
+    
     export function onReceivedString(s: string) : void {
 
         const kv = UTBRadioCode.getIntercom(s);
@@ -190,6 +194,7 @@ namespace UTBBotCode {
         }
     }
 
+
     export function  getBotTeam(): TeamName {
         return _team;
     }
@@ -198,13 +203,16 @@ namespace UTBBotCode {
         return _botStatus;
     }
 
+
     export function setBotStatus(bs: BotStatus) {
         _botStatus = bs;
     }
 
+
     export function getCollectedBallsCount(): number {
         return _collectedBallsCount;
     }
+
 
     export function incrementCollectedBallsCount(n: number): void {
         _collectedBallsCount += n;
