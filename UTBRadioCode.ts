@@ -64,7 +64,7 @@ namespace UTBRadioCode {
      * @returns True if the message is valid, false otherwise
      */
     export function isValidMessage(kv: { [key: string]: string }): boolean {
-        debug_message(`is valid  ${kv}  (needs ${MESSAGE_KEYS.K_FROM}, ${MESSAGE_KEYS.K_TO} and ${MESSAGE_KEYS.K_TYPE} `)
+        debug_message(`is valid  ${kv}  (needs ${MESSAGE_KEYS.K_FROM}, ${MESSAGE_KEYS.K_TO} and ${MESSAGE_KEYS.K_TYPE})`)
         if (!(kv[MESSAGE_KEYS.K_FROM] && kv[MESSAGE_KEYS.K_TO] && kv[MESSAGE_KEYS.K_TYPE])) {
             console.log("Incomplete message: " + JSON.stringify(kv));
             return false;
@@ -153,7 +153,7 @@ namespace UTBRadioCode {
 
     // Shared utility functions
     export function parseMessage(msg: string): { [key: string]: string } {
-        debug_message(`parse Message from "${msg}`)
+        debug_message(`parse message in ${msg}`)
         const parts = msg.split(FS);
         const result: { [key: string]: string } = {};
         for (const part of parts) {
@@ -166,9 +166,13 @@ namespace UTBRadioCode {
     }
 
     export function buildMessage(obj: { [key: string]: string }): string {
+      
         return Object.keys(obj)
             .map(key => `${key}=${obj[key]}`)
             .join(FS);
+        
+        
+        
     }
 
 
@@ -186,36 +190,39 @@ namespace UTBRadioCode {
         return msg;
 
     }
-    export function emitHeartBeat() {
+    export function emitHeartBeat() :boolean{
         
         if (!isInitialized()) {
-            console.log(control.deviceName() + " " +"UTBRadio not initialized. Please call UTBRadio.init() first.");
-            return;
+            console.error(control.deviceName() + " " +"UTBRadio not initialized. Please call UTBRadio.init() first.");
+            return false;
         }
         const msgObj = createMessage();
         msgObj[MESSAGE_KEYS.K_TYPE] = getMessageTypeLabel(MessageType.HEARTBEAT);
         debug_message("emit HeartBeat")
-        emitMessage(buildMessage(msgObj));
+        return emitMessage(buildMessage(msgObj));
     }
 
-    export function emitMessage(msg: string) {
+    export function emitMessage(msg: string): boolean {
         debug_message(`emit Message "${msg}"`)
         if (!isInitialized()) {
-            console.log("UTBRadio not initialized. Please call UTBRadio.init() first.");
-            return;
+            console.error("UTBRadio not initialized. Please call UTBRadio.init() first.");
+            return false;
         }
         
         radio.sendString(msg);
+        return true
+
     }
-    export function emitLog(level: LogLevel, message: string) {
+    export function emitLog(level: LogLevel, message: string) : boolean{
         debug_message(`emit log "${message}"`)
         if (level >= UTBRadioCode.getLogLevel()) {
             const msgObj = UTBRadioCode.createMessage();
             msgObj[MESSAGE_KEYS.K_TYPE] = getMessageTypeLabel(MessageType.LOG);
             msgObj[MESSAGE_KEYS.K_LOG_LEVEL] = level.toString();
             msgObj[MESSAGE_KEYS.K_PAYLOAD] = message;
-            UTBRadioCode.emitMessage(UTBRadioCode.buildMessage(msgObj));
+            return UTBRadioCode.emitMessage(UTBRadioCode.buildMessage(msgObj));
         }
+        return false
     }
     export function debug_message(s:string): void {
         if (_isDebug) console.log(deviceId + " " + s)

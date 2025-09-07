@@ -138,37 +138,39 @@ namespace UTBBotCode {
         return msgObj;
     }
 
-    export function emitTeamName(tn: TeamName) {
+    export function emitTeamName(tn: TeamName):boolean {
         let msgObj = createMessage();
         msgObj[MESSAGE_KEYS.K_TYPE] = UTBRadioCode.getMessageTypeLabel(MessageType.DECLARETEAM);
         msgObj[MESSAGE_KEYS.K_TEAM] = getTeamNameLabel(tn);
-        UTBRadioCode.emitMessage(UTBRadioCode.buildMessage(msgObj));
+        return UTBRadioCode.emitMessage(UTBRadioCode.buildMessage(msgObj));
     }
     
-    export function emitStatus() {
+    export function emitStatus() :boolean{
         let msgObj = createMessage();
         msgObj[MESSAGE_KEYS.K_TYPE] = UTBRadioCode.getMessageTypeLabel(MessageType.STATUS);
         msgObj[MESSAGE_KEYS.K_STATUS_COUNT] = _collectedBallsCount.toString();
         msgObj[MESSAGE_KEYS.K_STATUS_STATE] = _botStatus.toString();
         msgObj[MESSAGE_KEYS.K_TEAM] = getTeamNameLabel(_team);
-        UTBRadioCode.emitMessage(UTBRadioCode.buildMessage(msgObj));
+        return UTBRadioCode.emitMessage(UTBRadioCode.buildMessage(msgObj));
     }
     
     export function resetCollectCount() {
         _collectedBallsCount = 0;
     }
-    export function emitAcknowledgement(itc: IntercomType) {
+    export function emitAcknowledgement(itc: IntercomType) :boolean{
         if (_controllerName) {
             let msgObj = UTBRadioCode.createMessage();
             msgObj[MESSAGE_KEYS.K_TYPE] = UTBRadioCode.getMessageTypeLabel(MessageType.ACKNOWLEDGE);
             msgObj[MESSAGE_KEYS.K_PAYLOAD] = itc.toString();
-            UTBRadioCode.emitMessage(UTBRadioCode.buildMessage(msgObj));
-            UTBRadioCode.emitLog(LogLevel.Info, `acknowledge  ${getIntercomLabel(itc)} to controller ${_controllerName}`);
+            return UTBRadioCode.emitMessage(UTBRadioCode.buildMessage(msgObj));
+            
         } else {
             UTBRadioCode.emitLog(LogLevel.Warning, `Cannot send acknowledgement for ${getIntercomLabel(itc)}: No controller registered`);
+            return false
         }
     }
-    export function registerControllerName(name: string): void {
+
+    export function registerControllerName(name: string) {
         if (!_controllerName) {
             _controllerName = name;
             UTBRadioCode.emitLog(LogLevel.Info, "Controller registered as " + _controllerName);
