@@ -18,9 +18,8 @@ namespace UTBControllerCode {
     export const COMMAND_OBEYME = "OBEYME";
 
     export function initialize(): void {
-        UTBRadioCode.init();
+        UTBRadioCode.init(onRadioReceivedString);
         sendObeyMe()
-        radio.onReceivedString(onRadioReceivedString)
     }
 
     export function onRadioReceivedString(receivedString: string): void {

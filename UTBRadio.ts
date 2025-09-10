@@ -39,17 +39,9 @@ namespace UTBRadio {
     //% advanced=true
     export function emitHeartBeat() {
         UTBRadioCode.emitHeartBeat();
-    }
+    }   
 
-    
-
-
-
-
-    
-
-    
-    //% group="Communication"
+        //% group="Communication"
     //% blockId=utb_get_radio_group block="get radio group" advanced=true
     //% weight=90
     export function getRadioGroup(): number {
