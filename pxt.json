@@ -9,7 +9,9 @@
     },
     "files": [
         "README.md",
-	"main.ts"
+	    "main.ts",
+        "UTBRadioCode.ts",
+        "UTBRadio.ts"
 
     ],
     "public": false
