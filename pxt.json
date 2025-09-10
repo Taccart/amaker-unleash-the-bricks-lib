@@ -9,7 +9,6 @@
     },
     "files": [
         "README.md",
-	    "main.ts",
         "UTBRadioCode.ts",
         "UTBRadio.ts",
         "UTBControllerCode.ts",

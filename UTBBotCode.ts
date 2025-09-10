@@ -65,20 +65,18 @@ namespace UTBBotCode {
         onDanger: () => void;
         onObeyMe: (from: string) => void;
     };
-    export function initialize(team: TeamName): void {
 
+    export function initialize(team: TeamName): void {
         _team = team;
-        UTBRadioCode.init();
-        radio.onReceivedString(onReceivedString);
-        
+        UTBRadioCode.init(onReceivedString);
         _isInitialized = true;
     }
+
     export function isInitialized(): boolean {
         return _isInitialized;
     }
 
     // Use a plain object with string keys for micro:bit compatibility
-
     export function getBotStatusLabel(bs: number): string {
         switch (bs) {
             case BotStatus.BringBack: return "Bring back"; break;
@@ -93,6 +91,7 @@ namespace UTBBotCode {
             default: return "UNKNOWN"; break;
         }
     }
+
     export function getTeamNameLabel(tn: TeamName): string {
         switch (tn) {
             case TeamName.AmaBot: return "AmaBot";
@@ -107,6 +106,7 @@ namespace UTBBotCode {
             default: return "UNKNOWN";
         }
     }
+
     export function getIntercomLabel(itc: IntercomType): string {
         switch (itc) {
             case IntercomType.HEARTBEAT: return "HEARTBEAT";
@@ -119,12 +119,15 @@ namespace UTBBotCode {
             default: return "UNKNOWN";
         }
     }
+
     export function setOnStartCallback(f: () => void) {
         _callbacks.onStart = f;
     }
+
     export function setOnStopCallback(f: () => void) {
         _callbacks.onStop = f;
     }
+
     export function setOnDangerCallback(f: () => void) {
         _callbacks.onDanger = f;
     }
@@ -137,23 +140,19 @@ namespace UTBBotCode {
     export function emitStatus() :boolean{
         const msg = new UTBRadioCode.RadioMessage(UTBRadioCode.MessageType.STATUS,  getBotStatusLabel(getBotStatus()));
         return  UTBRadioCode.emitString(msg.encode());
-    
     }
     
     export function resetCollectCount() {
         _collectedBallsCount = 0;
     }
-    export function emitAcknowledgement(itc: IntercomType) :boolean{
 
+    export function emitAcknowledgement(itc: IntercomType) :boolean{
         const msg = new UTBRadioCode.RadioMessage(UTBRadioCode.MessageType.ACKNOWLEDGE,  getIntercomLabel(itc));
         return  UTBRadioCode.emitString(msg.encode());
         UTBRadioCode.emitLog("IOBEYTO" + _controllerName );
-
-            
     }
 
     export function registerControllerName(name: string) {
-
         if (!_controllerName) {
             _controllerName = name;
             console.log(`My controller is now ${_controllerName}`)
@@ -194,7 +193,6 @@ namespace UTBBotCode {
         }
     }
 
-
     export function  getBotTeam(): TeamName {
         return _team;
     }
@@ -202,7 +200,6 @@ namespace UTBBotCode {
     export function getBotStatus(): BotStatus {
         return _botStatus;
     }
-
 
     export function setBotStatus(bs: BotStatus) {
         _botStatus = bs;
@@ -212,7 +209,6 @@ namespace UTBBotCode {
     export function getCollectedBallsCount(): number {
         return _collectedBallsCount;
     }
-
 
     export function incrementCollectedBallsCount(n: number): void {
         _collectedBallsCount += n;

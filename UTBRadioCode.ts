@@ -85,9 +85,10 @@ namespace UTBRadioCode {
         }
     
     }
-     
-    export function init(radioGroup: number = 1): void {
+
+    export function init(onReceiveHandler: (v: string) => void, radioGroup: number = 1): void {
         setRadioGroup(radioGroup);
+        radio.onReceivedString(onReceiveHandler);
         _initialized = true;
 
     }
@@ -95,23 +96,18 @@ namespace UTBRadioCode {
     export function isInitialized(): boolean {
         return _initialized;
     }
-
-
     
     export function setRadioGroup(group: number): void {
         _radioGroup = validateRadioGroup(group);
         radio.setGroup(_radioGroup);
     }
-    export function incrementRadioGroup(): void {
-        let newGroup = _radioGroup + 1;
+    export function incrementRadioGroup(increment:number=1): number {
+        let newGroup = getRadioGroup() + 1;
         if (newGroup > RADIO_GROUP.MAX) newGroup = RADIO_GROUP.MIN;
         setRadioGroup(newGroup);
+        return getRadioGroup();
     }
-    export function decrementRadioGroup(): void {
-        let newGroup = _radioGroup - 1;
-        if (newGroup < RADIO_GROUP.MIN) newGroup = RADIO_GROUP.MAX;
-        setRadioGroup(newGroup);
-    }
+    
     export function toggleEchoToConsole(): void {
         _isEchoToConsole = !_isEchoToConsole;
     }
