@@ -1,4 +1,16 @@
-// UTBRadio.ts
+/*！
+ * @file amaker-unleash-the-bricks-lib/UTBRadioCode.ts
+ * @brief aMaker lib for Unleash The Bricks 2025
+ * @n [README](https://github.com/Taccart/amaker-unleash-the-bricks-lib/blob/master/README.md)
+ *    of the eight-channel steering gear, two-step motor .
+ *
+ * @copyright	TAccart, 2025
+ * @copyright	GNU Lesser General Public License
+ * @author TAccart
+ * * @version  V0.0.0alpha
+ * @date  2025-09-10
+ */
+// 
 // Library for Amaker Unleash The Bricks contest radio communication
 // Typescript code adapted to micro:bit limitations
 namespace UTBRadioCode {
