@@ -2,7 +2,7 @@
 // Library for Amaker Unleash The Bricks contest bot communication and status management
 // wrapper for UTBControllerCode to be exposed in https://makecode.microbit.org/
 
-//% color=#300000 weight=1000 icon="\u25a3" name="amaker Controller"
+//% color=#ff504d weight=1000 icon="\u16E4" name="amaker Controller"
 namespace UTBController {
 
     //% group="for controller"

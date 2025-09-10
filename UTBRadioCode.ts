@@ -13,7 +13,7 @@ namespace UTBRadioCode {
     const MSG_PAYLOAD_LEN = 13
     const RADIO_GROUP = { MIN: 0, MAX: 8 };
 
-        export const deviceId = (control.deviceName().substring(0, MSG_ID_LEN) + "------").substring(0, MSG_ID_LEN);
+    export const deviceId = (control.deviceName().substr(0, MSG_ID_LEN) + "------").substr(0, MSG_ID_LEN);
     /**
      *  radio message have a max size of 19 char.
     *  we will encode them as <<device id (5         char)>.<msg type 1 char><payload (13 char)>>

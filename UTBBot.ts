@@ -2,7 +2,7 @@
 // Library for Amaker Unleash The Bricks contest bot communication and status management
 // wrapper for UTBBotCode to be exposed in https://makecode.microbit.org/
 
-//% color=#300000 weight=1000 icon="\u25a3" 
+//% color=#4f0230 weight=1000 icon="\u26D0"
 namespace UTBBot {
 
 
@@ -68,14 +68,13 @@ namespace UTBBot {
 
     //% group="Bot"getIntercomType
     //% blockId=contest_emit_status block="Emit bot status"
-
     export function emitStatus() {
         UTBBotCode.emitStatus();
     }
 
     //% group="Bot"
-    //% blockId=contest_bot_status block="Set and emit bot status to $bot_status" blockGap=16
-    //% bot_status.defl=BotStatus.Idle
+    //% blockId=contest_bot_status block="Change bot status to $bot_status" blockGap=16
+    //% bot_status.defl=UTBBotCode.BotStatus.Idle
     //% bot_status.fieldEditor="gridpicker"
     //% bot_status.fieldOptions.decompileLiterals=true
     //% group="conf"
@@ -94,12 +93,12 @@ namespace UTBBot {
     }
 
     //% group="Bot"
-    //% blockId=utb_device_name block="device name"
+    //% blockId=utb_device_name block="device Id "
     //% group="Bot"
     //% description="Returns a unique device name based on device name and serial number"
     //% advanced=true
-    export function getDeviceName(): string {
-        return control.deviceName() + "." + control.deviceSerialNumber().toString();
+    export function getDeviceId(): string {
+        return UTBRadioCode.deviceId
 
     }
     //% group="Bot"

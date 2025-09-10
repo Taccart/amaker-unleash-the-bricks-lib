@@ -2,7 +2,7 @@
 // Library for Amaker Unleash The Bricks contest radio communication
 // wrapper for UTBRadioCode to be exposed in https://makecode.microbit.org/
 
-//% color=#300000 weight=1000 icon="\u25a3"
+//% color=#000835 weight=1000 icon="\u16C9"
 namespace UTBRadio {
     
     
