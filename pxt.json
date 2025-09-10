@@ -8,13 +8,8 @@
         "radio": "*"
     },
     "files": [
-        "main.ts",
-        "UTBBot.ts",
-        "UTBBotCode.ts",
-        "UTBController.ts",
-        "UTBControllerCode.ts",
-        "UTBRadio.ts",
-        "UTBRadioCode.ts"
+        "README.md",
+        "main.ts"
     ],
     "testFiles": [],
     "public": true,
