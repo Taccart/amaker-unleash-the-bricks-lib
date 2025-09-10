@@ -1,4 +1,14 @@
-
+/*！
+ * @file amaker-unleash-the-bricks-lib/UTBControllerCode.ts
+ * @brief aMaker lib for Unleash The Bricks 2025
+ * @n [README](https://github.com/Taccart/amaker-unleash-the-bricks-lib/blob/master/README.md)
+ *
+ * @copyright	TAccart, 2025
+ * @copyright	GNU Lesser General Public License
+ * @author TAccart
+ * * @version  V0.0.0alpha
+ * @date  2025-09-10
+ */
 
 //% weight=10 color=#1a61a9 icon="\uf013" block="sdsd-motor"
 namespace UTBControllerCode {

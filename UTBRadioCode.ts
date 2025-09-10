@@ -2,7 +2,6 @@
  * @file amaker-unleash-the-bricks-lib/UTBRadioCode.ts
  * @brief aMaker lib for Unleash The Bricks 2025
  * @n [README](https://github.com/Taccart/amaker-unleash-the-bricks-lib/blob/master/README.md)
- *    of the eight-channel steering gear, two-step motor .
  *
  * @copyright	TAccart, 2025
  * @copyright	GNU Lesser General Public License

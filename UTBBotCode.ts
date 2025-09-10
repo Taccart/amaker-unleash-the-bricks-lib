@@ -1,4 +1,14 @@
-// UTBBotCode.ts
+/*！
+ * @file amaker-unleash-the-bricks-lib/UTBBotCode.ts
+ * @brief aMaker lib for Unleash The Bricks 2025
+ * @n [README](https://github.com/Taccart/amaker-unleash-the-bricks-lib/blob/master/README.md)
+ *
+ * @copyright	TAccart, 2025
+ * @copyright	GNU Lesser General Public License
+ * @author TAccart
+ * * @version  V0.0.0alpha
+ * @date  2025-09-10
+ */
 // Library for Amaker Unleash The Bricks contest bot communication and status management
 // Typescript code adapted to micro:bit limitations
 
@@ -40,7 +50,17 @@ namespace UTBBotCode {
     let _controllerName: string;
     let _collectedBallsCount = 0;
     let _botStatus: BotStatus = BotStatus.Idle;
-    let _isInitialized = false;
+    let _isIniti/*！
+ * @file amaker-unleash-the-bricks-lib/UTBControllerCode.ts
+ * @brief aMaker lib for Unleash The Bricks 2025
+ * @n [README](https://github.com/Taccart/amaker-unleash-the-bricks-lib/blob/master/README.md)
+ *
+ * @copyright	TAccart, 2025
+ * @copyright	GNU Lesser General Public License
+ * @author TAccart
+ * * @version  V0.0.0alpha
+ * @date  2025-09-10
+ */alized = false;
 
     let _callbacks: CommandHandlerMap = {
         onStart: () => { console.log("Missing onStart callback function"); },

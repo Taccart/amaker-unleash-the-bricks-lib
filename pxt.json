@@ -11,8 +11,11 @@
         "README.md",
 	    "main.ts",
         "UTBRadioCode.ts",
-        "UTBRadio.ts"
-
+        "UTBRadio.ts",
+        "UTBControllerCode.ts",
+        "UTBController.ts",
+        "UTBBotCode.ts",
+        "UTBBot.ts"
     ],
     "public": false
 }
