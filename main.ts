@@ -23,11 +23,11 @@ UTBBot.onMessageDangerReceived(function () {
 input.onButtonPressed(Button.A, function () {
     debugmsg("onButton A: increment collected balls")
     basic.showIcon(IconNames.Heart)
-    basic.showString("" + (UTBBot.incrementCollectedBallsCount(1)))
+    basic.showString("" + UTBBot.incrementCollectedBallsCount(1))
     basic.showIcon(IconNames.SmallHeart)
 })
 function debugmsg (msg: string) {
-    console.log("" + control.deviceName() + "." + control.deviceSerialNumber() +":"+control.micros()/1000+":"+msg)
+    console.log("" + control.deviceName() + "." + ("" + control.deviceSerialNumber()) + ":" + ("" + control.micros() / 1000) + ":" + msg)
 }
 input.onButtonPressed(Button.AB, function () {
     debugmsg("onButton A+B: newBotStatus Messing")
@@ -38,7 +38,7 @@ input.onButtonPressed(Button.AB, function () {
 input.onButtonPressed(Button.B, function () {
     debugmsg("onButton B: emitStatus")
     basic.showIcon(IconNames.Diamond)
-    basic.showString("" + (UTBBot.incrementCollectedBallsCount(10)))
+    basic.showString("" + UTBBot.incrementCollectedBallsCount(10))
     basic.showIcon(IconNames.SmallDiamond)
 })
 input.onLogoEvent(TouchButtonEvent.Touched, function () {
