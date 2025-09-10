@@ -53,9 +53,9 @@ namespace UTBBotCode {
     let _isInitialized=false
 
     let _callbacks: CommandHandlerMap = {
-        onStart: () => { console.log("Missing onStart callback function"); },
-        onStop: () => { console.log("Missing onStop callback function"); },
-        onDanger: () => { console.log("Missing onDanger callback function"); },
+        onStart: () => { console.debug("Missing onStart callback function"); },
+        onStop: () => { console.debug("Missing onStop callback function"); },
+        onDanger: () => { console.debug("Missing onDanger callback function"); },
         onObeyMe: (name: string) => UTBBotCode.registerControllerName(name) 
     };
     
@@ -155,10 +155,10 @@ namespace UTBBotCode {
     export function registerControllerName(name: string) {
         if (!_controllerName) {
             _controllerName = name;
-            console.log(`My controller is now ${_controllerName}`)
+            console.debug(`My controller is now ${_controllerName}`)
             emitAcknowledgement(IntercomType.IOBEY);
         } else {
-            console.log(`My controller is already  ${_controllerName} : I deny order from ${name}`)
+            console.debug(`My controller is already  ${_controllerName} : I deny order from ${name}`)
             UTBRadioCode.emitLog("IOBEYTO" + _controllerName +"DENY"+name);
         }
     }
@@ -168,7 +168,7 @@ namespace UTBBotCode {
     export function onReceivedString(s: string) : void {
         const rmsg: UTBRadioCode.RadioMessage= UTBRadioCode.RadioMessage.decode(s);
         if (!rmsg || rmsg.type !== UTBRadioCode.MessageType.INTERCOM) {
-            console.log(`Not in intercom : I don't care`)
+            console.debug(`Not in intercom : I don't care`)
             return ;}
 
         if  (rmsg.payload===UTBControllerCode.COMMAND_OBEYME) {
@@ -177,7 +177,7 @@ namespace UTBBotCode {
 
         if (rmsg.from !== _controllerName) 
         {
-            console.log(`Intercom emitted by illegitimate source ${rmsg.from} - my controller is ${_controllerName}`);
+            console.debug(`Intercom emitted by illegitimate source ${rmsg.from} - my controller is ${_controllerName}`);
             return
         }
         
@@ -187,7 +187,7 @@ namespace UTBBotCode {
             case UTBControllerCode.COMMAND_DANGER: _callbacks.onDanger(); break;
             
             default: {
-                console.log(`Unhandled intercom: ${rmsg.payload}`);
+                console.debug(`Unhandled intercom: ${rmsg.payload}`);
                 break;
             }
         }
