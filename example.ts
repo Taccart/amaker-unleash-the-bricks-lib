@@ -27,7 +27,7 @@ input.onButtonPressed(Button.A, function () {
     basic.showIcon(IconNames.SmallHeart)
 })
 function debugmsg (msg: string) {
-    console.log("" + control.deviceName() + "." + control.deviceSerialNumber() +":"+control.micros()/1000+":"+msg)
+    console.debug("" + control.deviceName() + "." + control.deviceSerialNumber() +":"+control.micros()/1000+":"+msg)
 }
 input.onButtonPressed(Button.AB, function () {
     debugmsg("onButton A+B: newBotStatus Messing")
