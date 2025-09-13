@@ -16,7 +16,8 @@
         "UTBBotCode.ts",
         "UTBBot.ts",
         "main.ts",
-        "main.blocks"
+        "main.blocks",
+        "tutorial-info-cache.json"
     ],
     "public": true,
     "targetVersions": {
