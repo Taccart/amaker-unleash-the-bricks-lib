@@ -7,7 +7,7 @@ namespace UTBController {
 
     //% group="for controller"
     //% blockId=utb_controller_init_as_controller block="Initialize as controller"
-    //% advanced=true
+
     export function initAsController (): void {
         UTBControllerCode.initialize();
     }

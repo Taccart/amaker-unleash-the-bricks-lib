@@ -15,8 +15,7 @@
         "UTBController.ts",
         "UTBBotCode.ts",
         "UTBBot.ts",
-        "main.ts", 
-        "main.py", 
+        "main.ts",
         "main.blocks"
     ],
     "public": true,
@@ -26,6 +25,6 @@
     },
     "supportedTargets": [
         "microbit"
-    ]
-
+    ],
+    "preferredEditor": "blocksprj"
 }
