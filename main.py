@@ -26,12 +26,12 @@ UTBBot.on_message_danger_received(on_message_danger_received)
 def on_button_pressed_a():
     debugmsg("onButton A: increment collected balls")
     basic.show_icon(IconNames.HEART)
-    basic.show_string("" + str((UTBBot.increment_collected_balls_count(1))))
+    basic.show_string("" + str(UTBBot.increment_collected_balls_count(1)))
     basic.show_icon(IconNames.SMALL_HEART)
 input.on_button_pressed(Button.A, on_button_pressed_a)
 
 def debugmsg(msg: str):
-    print("" + control.device_name() + "." + str(control.device_serial_number()) + ":" + str(control.micros() / 1000) + ":" + msg)
+    print("" + control.device_name() + "." + ("" + str(control.device_serial_number())) + ":" + ("" + str(control.micros() / 1000)) + ":" + msg)
 
 def on_button_pressed_ab():
     debugmsg("onButton A+B: newBotStatus Messing")
@@ -43,7 +43,7 @@ input.on_button_pressed(Button.AB, on_button_pressed_ab)
 def on_button_pressed_b():
     debugmsg("onButton B: emitStatus")
     basic.show_icon(IconNames.DIAMOND)
-    basic.show_string("" + str((UTBBot.increment_collected_balls_count(10))))
+    basic.show_string("" + str(UTBBot.increment_collected_balls_count(10)))
     basic.show_icon(IconNames.SMALL_DIAMOND)
 input.on_button_pressed(Button.B, on_button_pressed_b)
 

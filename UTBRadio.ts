@@ -31,10 +31,10 @@ namespace UTBRadio {
     
 
     //% group="Common"
-    //% blockId=utb_set_radio_group block="set radio group %group"
+    //% blockId=utb_set_radio_group block="increment radio %group"
     //% weight=90
-    export function setRadioGroup(group: number): void {
-        UTBRadioCode.setRadioGroup(group);
+    export function incrementRadioGroup(): void {
+        UTBRadioCode.incrementRadioGroup();
     }
 
     //% group="Common"
