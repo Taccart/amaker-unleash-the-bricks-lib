@@ -18,7 +18,7 @@ input.onButtonPressed(Button.A, function () {
     UTBController.sendActionStart()
 })
 function debugmsg (msg: string) {
-    console.log("" + control.deviceName() + "." + ("" + control.deviceSerialNumber()) + ":" + ("" + control.micros() / 1000) + ":" + msg)
+    console.log("" + control.deviceName() + " " + ("" + control.micros() / 1000) + "ms : msg=" + msg)
 }
 input.onButtonPressed(Button.AB, function () {
     basic.showIcon(IconNames.Asleep)

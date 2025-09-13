@@ -27,7 +27,7 @@ namespace UTBControllerCode {
     export function onRadioReceivedString(receivedString: string): void {
         let msgString=`failed to parse receivedString ${receivedString}`
         const msgObj : UTBRadioCode.RadioMessage= UTBRadioCode.RadioMessage.decode(receivedString);
-        msgString= msgObj ? `from=${msgObj.from},type=${msgObj.type},payload=${msgObj.payload}` : msgString;
+        msgString = msgObj ? `from=${msgObj.from}, type=${msgObj.type} (${UTBRadioCode.getMessageTypeLabel(msgObj.type)}), payload=${msgObj.payload}` : msgString;
         serial.writeLine( msgString );
     }
 

@@ -76,7 +76,7 @@ namespace UTBRadioCode {
             const from = msg.substr(MSG_ID_START, MSG_ID_LEN);
             console.debug(`from =  ${from}`)
             let mtInt = parseInt(msg.charAt(5));
-            console.debug(`mtInt =  ${mtInt}`)
+            console.debug(`mtInt =  ${mtInt} (${getMessageTypeLabel(mtInt)})`)
             if (isNaN(mtInt) || mtInt < 0 || mtInt > 7) mtInt = null;
             
             const payload = msg.substr(MSG_PAYLOAD_START, MSG_PAYLOAD_LEN);

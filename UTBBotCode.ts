@@ -159,7 +159,7 @@ namespace UTBBotCode {
             emitAcknowledgement(IntercomType.IOBEY);
         } else {
             console.debug(`My controller is already  ${_controllerName} : I deny order from ${name}`)
-            UTBRadioCode.emitLog("IOBEYTO" + _controllerName +"DENY"+name);
+            UTBRadioCode.emitLog("DENY OBEY " + name);
         }
     }
     
