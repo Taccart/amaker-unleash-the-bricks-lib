@@ -14,7 +14,10 @@
         "UTBControllerCode.ts",
         "UTBController.ts",
         "UTBBotCode.ts",
-        "UTBBot.ts"
+        "UTBBot.ts",
+        "main.ts", 
+        "main.py", 
+        "main.blocks"
     ],
     "public": true,
     "targetVersions": {
