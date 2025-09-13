@@ -1,6 +1,6 @@
 {
     "name": "amaker-utb-lib",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "aMaker's Unleash the bricks library for micro:bit",
     "license": "MIT",
     "dependencies": {
