@@ -46,4 +46,76 @@ namespace UTBRadio {
     export function getDeviceId(): string {
         return UTBRadioCode.deviceId;
     }
+    //% group="Communication"
+    //% blockId=utb_show_ratio_group block="show radio group on LEDs" advanced=true
+    export function showRadioGroup() {
+        let r = UTBRadioCode.getRadioGroup();
+        if (r == 0) {
+            basic.showLeds(`
+            # # # . .
+            # . # . .
+            # # # . .
+            # # . . .
+            # . # . .
+            `)
+        } else if (r == 1) {
+            basic.showLeds(`
+            # # # . #
+            # . # . .
+            # # # . .
+            # # . . .
+            # . # . .
+            `)
+        } else if (r == 2) {
+            basic.showLeds(`
+            # # # . .
+            # . # . .
+            # # # . #
+            # # . . .
+            # . # . .
+            `)
+        } else if (r == 3) {
+            basic.showLeds(`
+            # # # . #
+            # . # . .
+            # # # . #
+            # # . . .
+            # . # . .
+            `)
+        } else if (r == 4) {
+            basic.showLeds(`
+            # # # . .
+            # . # . .
+            # # # . .
+            # # . . .
+            # . # . #
+            `)
+        } else if (r == 5) {
+            basic.showLeds(`
+            # # # . #
+            # . # . .
+            # # # . .
+            # # . . .
+            # . # . #
+            `)
+        } else if (r == 6) {
+            basic.showLeds(`
+            # # # . .
+            # . # . .
+            # # # . #
+            # # . . .
+            # . # . #
+            `)
+        } else if (r == 7) {
+            basic.showLeds(`
+            # # # . #
+            # . # . .
+            # # # . #
+            # # . . .
+            # . # . #
+            `)
+        } else {
+            basic.showString("" + (r))
+        }
+    }
 }

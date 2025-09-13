@@ -1,6 +1,7 @@
 input.onLogoEvent(TouchButtonEvent.LongPressed, function () {
+    UTBRadio.showRadioGroup()
     UTBRadio.incrementRadioGroup()
-    showRadioGroup()
+    UTBRadio.showRadioGroup()
 })
 function handleControllerMsg (receivedString: string) {
     switch (receivedString) {
@@ -18,76 +19,6 @@ input.onButtonPressed(Button.A, function () {
 })
 function debugmsg (msg: string) {
     console.log("" + control.deviceName() + "." + ("" + control.deviceSerialNumber()) + ":" + ("" + control.micros() / 1000) + ":" + msg)
-}
-function showRadioGroup () {
-    let r = UTBRadioCode.getRadioGroup();
-if (r == 0) {
-        basic.showLeds(`
-            # # # . .
-            # . # . .
-            # # # . .
-            # # . . .
-            # . # . .
-            `)
-    } else if (r == 1) {
-        basic.showLeds(`
-            # # # . #
-            # . # . .
-            # # # . .
-            # # . . .
-            # . # . .
-            `)
-    } else if (r == 2) {
-        basic.showLeds(`
-            # # # . .
-            # . # . #
-            # # # . .
-            # # . . .
-            # . # . .
-            `)
-    } else if (r == 3) {
-        basic.showLeds(`
-            # # # . #
-            # . # . #
-            # # # . .
-            # # . . .
-            # . # . .
-            `)
-    } else if (r == 4) {
-        basic.showLeds(`
-            # # # . .
-            # . # . .
-            # # # . #
-            # # . . .
-            # . # . .
-            `)
-    } else if (r == 5) {
-        basic.showLeds(`
-            # # # . #
-            # . # . .
-            # # # . #
-            # # . . .
-            # . # . #
-            `)
-    } else if (r == 6) {
-        basic.showLeds(`
-            # # # . .
-            # . # . #
-            # # # . #
-            # # . . .
-            # . # . .
-            `)
-    } else if (r == 7) {
-        basic.showLeds(`
-            # # # . #
-            # . # . #
-            # # # . #
-            # # . . .
-            # . # . .
-            `)
-    } else {
-        basic.showString("" + (r))
-    }
 }
 input.onButtonPressed(Button.AB, function () {
     basic.showIcon(IconNames.Asleep)
@@ -114,5 +45,6 @@ input.onLogoEvent(TouchButtonEvent.Pressed, function () {
 serial.onDataReceived(serial.delimiters(Delimiters.NewLine), function () {
     handleControllerMsg(serial.readLine())
 })
+music.setTempo(360)
 UTBController.initAsController()
-showRadioGroup()
+UTBRadio.showRadioGroup()
