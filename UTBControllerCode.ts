@@ -18,6 +18,7 @@ namespace UTBControllerCode {
     export const COMMAND_OBEYME = "OBEYME";
 
     export function initialize(): void {
+        serial.setBaudRate(115200)
         UTBRadioCode.init(onRadioReceivedString);
         sendObeyMe()
     }
@@ -27,7 +28,7 @@ namespace UTBControllerCode {
         let msgString=`failed to parse receivedString ${receivedString}`
         const msgObj : UTBRadioCode.RadioMessage= UTBRadioCode.RadioMessage.decode(receivedString);
         msgString= msgObj ? `from=${msgObj.from},type=${msgObj.type},payload=${msgObj.payload}` : msgString;
-        serial.writeString( msgString + serial.NEW_LINE);
+        serial.writeLine( msgString );
     }
 
     export function sendActionStart(): void {
