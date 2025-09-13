@@ -1,4 +1,15 @@
-// UTBRadio.ts
+/*！
+ * @file amaker-unleash-the-bricks-lib/UTBRadioCode.ts
+ * @brief aMaker lib for Unleash The Bricks 2025
+ * @n [README](https://github.com/Taccart/amaker-unleash-the-bricks-lib/blob/master/README.md)
+ *
+ * @copyright	TAccart, 2025
+ * @copyright	GNU Lesser General Public License
+ * @author TAccart
+ * * @version  V0.0.0alpha
+ * @date  2025-09-10
+ */
+// 
 // Library for Amaker Unleash The Bricks contest radio communication
 // Typescript code adapted to micro:bit limitations
 namespace UTBRadioCode {
@@ -60,23 +71,24 @@ namespace UTBRadioCode {
             return `${this.from}${this.type}${this.payload}`;
         }
         static decode(msg: string): RadioMessage|null {
-            console.log (`decoding string ${msg}`)
+            console.debug (`decoding string ${msg}`)
             if (msg.length < MSG_TYPE_LEN+MSG_ID_LEN) return null;
             const from = msg.substr(MSG_ID_START, MSG_ID_LEN);
-            console.log(`from =  ${from}`)
+            console.debug(`from =  ${from}`)
             let mtInt = parseInt(msg.charAt(5));
-            console.log(`mtInt =  ${mtInt}`)
+            console.debug(`mtInt =  ${mtInt}`)
             if (isNaN(mtInt) || mtInt < 0 || mtInt > 7) mtInt = null;
             
             const payload = msg.substr(MSG_PAYLOAD_START, MSG_PAYLOAD_LEN);
-            console.log(`payload =  ${payload}`)
+            console.debug(`payload =  ${payload}`)
             return new RadioMessage( mtInt, payload, from);
         }
     
     }
-     
-    export function init(radioGroup: number = 1): void {
+
+    export function init(onReceiveHandler: (v: string) => void, radioGroup: number = 1): void {
         setRadioGroup(radioGroup);
+        radio.onReceivedString(onReceiveHandler);
         _initialized = true;
 
     }
@@ -84,23 +96,18 @@ namespace UTBRadioCode {
     export function isInitialized(): boolean {
         return _initialized;
     }
-
-
     
     export function setRadioGroup(group: number): void {
         _radioGroup = validateRadioGroup(group);
         radio.setGroup(_radioGroup);
     }
-    export function incrementRadioGroup(): void {
-        let newGroup = _radioGroup + 1;
+    export function incrementRadioGroup(increment:number=1): number {
+        let newGroup = getRadioGroup() + 1;
         if (newGroup > RADIO_GROUP.MAX) newGroup = RADIO_GROUP.MIN;
         setRadioGroup(newGroup);
+        return getRadioGroup();
     }
-    export function decrementRadioGroup(): void {
-        let newGroup = _radioGroup - 1;
-        if (newGroup < RADIO_GROUP.MIN) newGroup = RADIO_GROUP.MAX;
-        setRadioGroup(newGroup);
-    }
+    
     export function toggleEchoToConsole(): void {
         _isEchoToConsole = !_isEchoToConsole;
     }
@@ -118,7 +125,7 @@ namespace UTBRadioCode {
 
     export function emitString(msg: string) : boolean{
         if (!isInitialized()) {
-            console.log("UTBRadio not initialized. Please call UTBRadio.init() first.");
+            console.debug("UTBRadio not initialized. Please call UTBRadio.init() first.");
             return false;
         }
         if (msg.length>19) {
@@ -127,7 +134,7 @@ namespace UTBRadioCode {
             
         }
 
-        console.log(`${deviceId }emitString: ${msg}`);
+        console.debug(`${deviceId }emitString: ${msg}`);
         radio.sendString(msg);
         return true;
     }

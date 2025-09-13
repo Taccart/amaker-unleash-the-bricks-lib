@@ -1,4 +1,14 @@
-// UTBBotCode.ts
+/*！
+ * @file amaker-unleash-the-bricks-lib/UTBBotCode.ts
+ * @brief aMaker lib for Unleash The Bricks 2025
+ * @n [README](https://github.com/Taccart/amaker-unleash-the-bricks-lib/blob/master/README.md)
+ *
+ * @copyright	TAccart, 2025
+ * @copyright	GNU Lesser General Public License
+ * @author TAccart
+ * * @version  V0.0.0alpha
+ * @date  2025-09-10
+ */
 // Library for Amaker Unleash The Bricks contest bot communication and status management
 // Typescript code adapted to micro:bit limitations
 
@@ -40,12 +50,12 @@ namespace UTBBotCode {
     let _controllerName: string;
     let _collectedBallsCount = 0;
     let _botStatus: BotStatus = BotStatus.Idle;
-    let _isInitialized = false;
+    let _isInitialized=false
 
     let _callbacks: CommandHandlerMap = {
-        onStart: () => { console.log("Missing onStart callback function"); },
-        onStop: () => { console.log("Missing onStop callback function"); },
-        onDanger: () => { console.log("Missing onDanger callback function"); },
+        onStart: () => { console.debug("Missing onStart callback function"); },
+        onStop: () => { console.debug("Missing onStop callback function"); },
+        onDanger: () => { console.debug("Missing onDanger callback function"); },
         onObeyMe: (name: string) => UTBBotCode.registerControllerName(name) 
     };
     
@@ -55,20 +65,18 @@ namespace UTBBotCode {
         onDanger: () => void;
         onObeyMe: (from: string) => void;
     };
-    export function initialize(team: TeamName): void {
 
+    export function initialize(team: TeamName): void {
         _team = team;
-        UTBRadioCode.init();
-        radio.onReceivedString(onReceivedString);
-        
+        UTBRadioCode.init(onReceivedString);
         _isInitialized = true;
     }
+
     export function isInitialized(): boolean {
         return _isInitialized;
     }
 
     // Use a plain object with string keys for micro:bit compatibility
-
     export function getBotStatusLabel(bs: number): string {
         switch (bs) {
             case BotStatus.BringBack: return "Bring back"; break;
@@ -83,6 +91,7 @@ namespace UTBBotCode {
             default: return "UNKNOWN"; break;
         }
     }
+
     export function getTeamNameLabel(tn: TeamName): string {
         switch (tn) {
             case TeamName.AmaBot: return "AmaBot";
@@ -97,6 +106,7 @@ namespace UTBBotCode {
             default: return "UNKNOWN";
         }
     }
+
     export function getIntercomLabel(itc: IntercomType): string {
         switch (itc) {
             case IntercomType.HEARTBEAT: return "HEARTBEAT";
@@ -109,12 +119,15 @@ namespace UTBBotCode {
             default: return "UNKNOWN";
         }
     }
+
     export function setOnStartCallback(f: () => void) {
         _callbacks.onStart = f;
     }
+
     export function setOnStopCallback(f: () => void) {
         _callbacks.onStop = f;
     }
+
     export function setOnDangerCallback(f: () => void) {
         _callbacks.onDanger = f;
     }
@@ -127,29 +140,25 @@ namespace UTBBotCode {
     export function emitStatus() :boolean{
         const msg = new UTBRadioCode.RadioMessage(UTBRadioCode.MessageType.STATUS,  getBotStatusLabel(getBotStatus()));
         return  UTBRadioCode.emitString(msg.encode());
-    
     }
     
     export function resetCollectCount() {
         _collectedBallsCount = 0;
     }
-    export function emitAcknowledgement(itc: IntercomType) :boolean{
 
+    export function emitAcknowledgement(itc: IntercomType) :boolean{
         const msg = new UTBRadioCode.RadioMessage(UTBRadioCode.MessageType.ACKNOWLEDGE,  getIntercomLabel(itc));
         return  UTBRadioCode.emitString(msg.encode());
         UTBRadioCode.emitLog("IOBEYTO" + _controllerName );
-
-            
     }
 
     export function registerControllerName(name: string) {
-
         if (!_controllerName) {
             _controllerName = name;
-            console.log(`My controller is now ${_controllerName}`)
+            console.debug(`My controller is now ${_controllerName}`)
             emitAcknowledgement(IntercomType.IOBEY);
         } else {
-            console.log(`My controller is already  ${_controllerName} : I deny order from ${name}`)
+            console.debug(`My controller is already  ${_controllerName} : I deny order from ${name}`)
             UTBRadioCode.emitLog("IOBEYTO" + _controllerName +"DENY"+name);
         }
     }
@@ -159,7 +168,7 @@ namespace UTBBotCode {
     export function onReceivedString(s: string) : void {
         const rmsg: UTBRadioCode.RadioMessage= UTBRadioCode.RadioMessage.decode(s);
         if (!rmsg || rmsg.type !== UTBRadioCode.MessageType.INTERCOM) {
-            console.log(`Not in intercom : I don't care`)
+            console.debug(`Not in intercom : I don't care`)
             return ;}
 
         if  (rmsg.payload===UTBControllerCode.COMMAND_OBEYME) {
@@ -168,7 +177,7 @@ namespace UTBBotCode {
 
         if (rmsg.from !== _controllerName) 
         {
-            console.log(`Intercom emitted by illegitimate source ${rmsg.from} - my controller is ${_controllerName}`);
+            console.debug(`Intercom emitted by illegitimate source ${rmsg.from} - my controller is ${_controllerName}`);
             return
         }
         
@@ -178,12 +187,11 @@ namespace UTBBotCode {
             case UTBControllerCode.COMMAND_DANGER: _callbacks.onDanger(); break;
             
             default: {
-                console.log(`Unhandled intercom: ${rmsg.payload}`);
+                console.debug(`Unhandled intercom: ${rmsg.payload}`);
                 break;
             }
         }
     }
-
 
     export function  getBotTeam(): TeamName {
         return _team;
@@ -193,7 +201,6 @@ namespace UTBBotCode {
         return _botStatus;
     }
 
-
     export function setBotStatus(bs: BotStatus) {
         _botStatus = bs;
     }
@@ -202,7 +209,6 @@ namespace UTBBotCode {
     export function getCollectedBallsCount(): number {
         return _collectedBallsCount;
     }
-
 
     export function incrementCollectedBallsCount(n: number): void {
         _collectedBallsCount += n;

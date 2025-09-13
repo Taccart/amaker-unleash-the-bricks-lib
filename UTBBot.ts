@@ -39,16 +39,15 @@ namespace UTBBot {
     //% blockId=contest_on_stop_received block="on Stop"
     //% description="Register a callback to run when a Stop message is received from the controller. An acknowledgement is sent back to the controller."
     export function onMessageStopReceived(callback: () => void) {
-
         UTBBotCode.setOnStopCallback(callback);
         UTBBotCode.emitAcknowledgement(UTBBotCode.IntercomType.STOP);
     }
+
     //% group="Bot"
     //% help=contest/on-danger_received
     //% blockId=contest_on_danger_received block="on Danger"
     //% description="Register a callback to run when a Danger message is received from the controller. An acknowledgement is sent back to the controller."
     export function onMessageDangerReceived(callback: () => void) {
-
         UTBBotCode.setOnDangerCallback(callback);
         UTBBotCode.emitAcknowledgement(UTBBotCode.IntercomType.DANGER);
     }
