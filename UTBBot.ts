@@ -58,9 +58,8 @@ namespace UTBBot {
         UTBRadioCode.emitHeartBeat();
     }
 
-    //% group="Bot
+    //% group="Bot"
     //% blockId=contest_emit_acknowledgement block="Emit acknowledgement for $command"
-    //% advanced=true
     export function emitAcknowledgement(command: UTBBotCode.IntercomType) {
         UTBBotCode.emitAcknowledgement(command);
     }
@@ -76,7 +75,6 @@ namespace UTBBot {
     //% bot_status.defl=UTBBotCode.BotStatus.Idle
     //% bot_status.fieldEditor="gridpicker"
     //% bot_status.fieldOptions.decompileLiterals=true
-    //% group="conf"
     //% weight=20
     export function newBotStatus(bot_status: UTBBotCode.BotStatus) {
         UTBBotCode.setBotStatus(bot_status);

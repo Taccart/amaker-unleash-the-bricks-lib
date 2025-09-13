@@ -22,7 +22,7 @@ namespace UTBRadioCode {
     const MSG_TYPE_LEN = 1
     const MSG_PAYLOAD_START = MSG_TYPE_START + MSG_TYPE_LEN
     const MSG_PAYLOAD_LEN = 13
-    const RADIO_GROUP = { MIN: 0, MAX: 8 };
+    const RADIO_GROUP = { MIN: 0, MAX: 7 };
 
     export const deviceId = (control.deviceName().substr(0, MSG_ID_LEN) + "------").substr(0, MSG_ID_LEN);
     /**
