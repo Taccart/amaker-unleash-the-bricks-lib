@@ -69,6 +69,7 @@ namespace UTBBotCode {
     export function initialize(team: TeamName): void {
         _team = team;
         UTBRadioCode.init(onReceivedString);
+        emitTeamName()
         _isInitialized = true;
     }
 
@@ -132,8 +133,8 @@ namespace UTBBotCode {
         _callbacks.onDanger = f;
     }
 
-    export function emitTeamName(tn: TeamName):boolean {
-        const msg = new UTBRadioCode.RadioMessage(UTBRadioCode.MessageType.LOG, getTeamNameLabel(tn));
+    export function emitTeamName():boolean {
+        const msg = new UTBRadioCode.RadioMessage(UTBRadioCode.MessageType.LOG, getTeamNameLabel(_team));
         return  UTBRadioCode.emitString(msg.encode());
     }
     
@@ -157,9 +158,11 @@ namespace UTBBotCode {
             _controllerName = name;
             console.debug(`My controller is now ${_controllerName}`)
             emitAcknowledgement(IntercomType.IOBEY);
+            emitTeamName()
+
         } else {
             console.debug(`My controller is already  ${_controllerName} : I deny order from ${name}`)
-            UTBRadioCode.emitLog("DENY OBEY " + name);
+            UTBRadioCode.emitLog("NO OBEY " + name);
         }
     }
     

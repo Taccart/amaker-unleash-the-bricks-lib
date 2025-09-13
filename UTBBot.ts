@@ -54,6 +54,11 @@ namespace UTBBot {
     export function emitHeartBeat() {
         UTBRadioCode.emitHeartBeat();
     }
+    //% group="Bot"
+    //% blockId=contest_emit_heartbeat block="Emit heartbeat"
+    export function emitTeamName() {
+        UTBBotCode.emitTeamName();
+    }
 
     //% group="Bot"
     //% blockId=contest_emit_acknowledgement block="Emit acknowledgement for $command"
