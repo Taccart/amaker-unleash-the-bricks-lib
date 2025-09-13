@@ -7,22 +7,8 @@ namespace UTBRadio {
    
     let _initialized: boolean = false;
 
-    //% group="Communication"
-    //% blockId=utb_increment_radio_group block="increment radio group by %inc"
-    //% inc.defl=1
-    export function incrementRadioGroup(inc: number):number {
-        return UTBRadioCode.incrementRadioGroup(inc);
-
-    }
-//% group="Communication"
-    //% blockId=utb_set_radio_group block="set radio group %group"
-    //% weight=90
-    export function setRadioGroup(group: number): void {
-        UTBRadioCode.setRadioGroup(group);
-    }
-
-    //% group="Communication"
-    //% blockId=utb_init block="Initialize radio group %radioGroup"
+    //% group="Common"
+    //% blockId=utb_init block="Initialize radio with custom message %onReceiveHandler and group %radioGroup"
     //% advanced=true
     export function init(onReceiveHandler: (v: string) => void, radioGroup: number = 1): void {
         UTBRadioCode.init(onReceiveHandler, radioGroup);
@@ -41,7 +27,15 @@ namespace UTBRadio {
         UTBRadioCode.emitHeartBeat();
     }   
 
-        //% group="Communication"
+
+    //% group="Common"
+    //% blockId=utb_set_radio_group block="increment radio %group"
+    //% weight=90
+    export function incrementRadioGroup(): void {
+        UTBRadioCode.incrementRadioGroup();
+    }
+
+    //% group="Common"
     //% blockId=utb_get_radio_group block="get radio group" advanced=true
     //% weight=90
     export function getRadioGroup(): number {

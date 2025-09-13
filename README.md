@@ -1,9 +1,22 @@
 
-> Open this page at [https://taccart.github.io/amaker-unleash-the-geek-lib/](https://taccart.github.io/amaker-unleash-the-geek-lib/)
-
 # aMaker Unleash The Bricks 2025 contest library
 
+> Open this page at [https://taccart.github.io/amaker-unleash-the-geek-lib/](https://taccart.github.io/amaker-unleash-the-geek-lib/)
 
+
+## Use as code for Controller bridge
+
+Command START STOP DANGER OBEYME received on serial will be transmitted 
+as UTB2025 commands.
+In absence of controller, a fallback with buttons is implemented : 
+
+| Input | associated with |
+|---|---
+| Button A | sends START |
+| Button B | sends DANGER |
+| Button A+B | sends STOP |
+| Logo pressed | send OBEYME |
+| Logo **long** pressed | increment radio group  |
 
 
 ## Use as Extension
