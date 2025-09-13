@@ -5,19 +5,16 @@
 //% color=#4f0230 weight=1000 icon="\u26D0"
 namespace UTBBot {
 
-
-    
+  
     //% group="Bot"
-
     //% blockId=conf_init_communication_channel block="Initialize as bot, team is %teamName"
     //% teamName.defl=UTBBotCode.TeamName.UNDEFINED
     //% teamName.fieldEditor="gridpicker"
     //% teamName.fieldOptions.decompileLiterals=true
     export function initAsBot(teamName: UTBBotCode.TeamName): void {
         UTBBotCode.initialize(teamName);
-
-
     }
+
     //% group="Bot"
     //% blockId=contest_get_bot_status block="Get bot current status"
     //% advanced=true
@@ -30,10 +27,10 @@ namespace UTBBot {
     //% blockId=contest_on_start_received block="on Start"
     //% description="Register a callback to run when a Start message is received from the controller. An acknowledgement is sent back to the controller."
     export function onMessageStartReceived(callback: () => void) {
-
         UTBBotCode.setOnStartCallback(callback);
         UTBBotCode.emitAcknowledgement(UTBBotCode.IntercomType.START);
     }
+    
     //% group="Bot"
     //% help=contest/on-stop-received
     //% blockId=contest_on_stop_received block="on Stop"
@@ -91,7 +88,6 @@ namespace UTBBot {
 
     //% group="Bot"
     //% blockId=utb_device_name block="device Id "
-    //% group="Bot"
     //% description="Returns a unique device name based on device name and serial number"
     //% advanced=true
     export function getDeviceId(): string {
@@ -103,6 +99,13 @@ namespace UTBBot {
     //% advanced=true
     export function getCollectedBallsCount(): number {
         return UTBBotCode.getCollectedBallsCount();
+    }
+   
+   //% group="Bot"
+    //% blockId=contest_get_controller block="Get controller name"
+    //% advanced=true
+   export function getControllerName():string {
+       return UTBBotCode.getControllerName()
     }
    
 }

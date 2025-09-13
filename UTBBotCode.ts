@@ -163,7 +163,9 @@ namespace UTBBotCode {
         }
     }
     
-    
+    export function getControllerName():string {
+        return _controllerName;
+    }
     
     export function onReceivedString(s: string) : void {
         const rmsg: UTBRadioCode.RadioMessage= UTBRadioCode.RadioMessage.decode(s);
